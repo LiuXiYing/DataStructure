@@ -1,4 +1,169 @@
 version: 1
 
-# 从“学号、姓名、github账号名”三列 Excel 导入。
-students: {}
+# 账号映射来自教师名单与 DataStructure 仓库 PR 作者。
+# 尚未确认 GitHub 账号的学生暂不登记，确认后再追加。
+students:
+  "2025011233":
+    name: 刘西莹
+    github: StudentYXNU
+    active: true
+  "2025010001":
+    name: 阎兆航
+    github: yan-zhao-hang
+    active: true
+  "2025010002":
+    name: 杨博
+    github: Boundary-Breaker
+    active: true
+  "2025010003":
+    name: 孙博文
+    github: Beau-Sun
+    active: true
+  "2025010004":
+    name: 冯子诚
+    github: demonlover07
+    active: true
+  "2025010005":
+    name: 郭亿龙
+    github: long-314
+    active: true
+  "2025010007":
+    name: 陈万
+    github: Tarilblazer
+    active: true
+  "2025010008":
+    name: 和明军
+    github: yxnuhmj-2026
+    active: true
+  "2025010009":
+    name: 吴孟讯
+    github: lucky1-ops
+    active: true
+  "2025010010":
+    name: 王德磊
+    github: shark844
+    active: true
+  "2025010011":
+    name: 马潞怡
+    github: Emoonstart
+    active: true
+  "2025010012":
+    name: 李兴如
+    github: Storm-xr516
+    active: true
+  "2025010013":
+    name: 李苹
+    github: xue17zq
+    active: true
+  "2025010014":
+    name: 高飞
+    github: RedFlowersG
+    active: true
+  "2025010015":
+    name: 陈星妤
+    github: serendipity-afk
+    active: true
+  "2025010016":
+    name: 刘胜
+    github: The-foolishperson
+    active: true
+  "2025010017":
+    name: 刘成林
+    github: lululu899
+    active: true
+  "2025010018":
+    name: 任浩
+    github: RH12i
+    active: true
+  "2025010019":
+    name: 张天源
+    github: StellaZhangoo
+    active: true
+  "2025010020":
+    name: 李宇轩
+    github: GEMLYX
+    active: true
+  "2025010021":
+    name: 和舒艳
+    github: Nelenxxx
+    active: true
+  "2025010022":
+    name: 施睿
+    github: User-498
+    active: true
+  "2025010023":
+    name: 罗皖月
+    github: Rrdi6
+    active: true
+  "2025010025":
+    name: 徐敦昊
+    github: xdh2007
+    active: true
+  "2025010026":
+    name: 龙锦程
+    github: LJMGX
+    active: true
+  "2025010027":
+    name: 刘馨远
+    github: Naiveg-stack
+    active: true
+  "2025010028":
+    name: 晏皓洋
+    github: 2006289yhy
+    active: true
+  "2025010029":
+    name: 杨春银
+    github: yin439
+    active: true
+  "2025010030":
+    name: 资婷
+    github: Eternity-6
+    active: true
+  "2025010031":
+    name: 沈新胜
+    github: victory-sxs
+    active: true
+  "2025010032":
+    name: 李银喆
+    github: sherggte
+    active: true
+  "2025010033":
+    name: 王府雄
+    github: 2026504671-stack
+    active: true
+  "2025010034":
+    name: 王宗龙
+    github: Draka-w
+    active: true
+  "2025010035":
+    name: 张起鸣
+    github: yanyu-droid
+    active: true
+  "2025010036":
+    name: 李洋
+    github: li-yang-andy
+    active: true
+  "2025010037":
+    name: 赵一锦
+    github: wcbwp
+    active: true
+  "2025010038":
+    name: 卯光浩
+    github: 08mgh
+    active: true
+  "2025010039":
+    name: 徐晟杰
+    github: lrydxb
+    active: true
+  "2025010040":
+    name: 罗付英
+    github: ROY-wy1
+    active: true
+  "2025010041":
+    name: 张辉
+    github: free-0011
+    active: true
+  "2025145025":
+    name: 范文韬
+    github: fwt307
+    active: true

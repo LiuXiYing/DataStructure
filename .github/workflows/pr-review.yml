@@ -8,7 +8,7 @@ on:
 permissions: {}
 
 concurrency:
-  group: pr-review-${{ github.event.workflow_run.head_repository.id }}-${{ github.event.workflow_run.head_branch }}
+  group: pr-review-${{ github.event.workflow_run.display_title }}
   cancel-in-progress: true
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
     if: >-
       ${{
         github.event.workflow_run.conclusion == 'success' &&
-        github.event.workflow_run.event == 'pull_request' &&
+        github.event.workflow_run.event == 'pull_request_target' &&
         github.event.workflow_run.head_repository.full_name != null
       }}
     steps:
@@ -42,7 +42,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: 使用共享审核器审核并处理 PR
-        uses: LiuXiYing/course-pr-reviewer@1ac2a54292c83cd11a03d74aa8d2388c3b2bbfcc
+        uses: LiuXiYing/course-pr-reviewer@102aba55513aadf01d1feecd576cb4c88b6b4d71
         with:
           config-path: .github/course-review.yml
           students-path: .github/students.yml
