@@ -82,3 +82,15 @@ assignments:
       - clion-toolchain.png 必须清晰显示 CLion 的 Toolchains 设置页面、当前工具链名称，以及 CMake、Build Tool、C Compiler 和 Debugger 均已填入具体路径或版本而非留空。
       - 截图必须能清晰确认 CLion 窗口、项目树中的 C 源文件（文件名为 helloworld.c 或 main.c 均可）、编辑器中的完整 C 源代码、Run 窗口输出 Hello, World!，以及程序以退出码 0 正常结束。
       - 截图必须来自学生本人的电脑环境并使用电脑截图功能；出现手机拍摄造成的反光、摩尔纹、明显倾斜或文字无法辨认时判为不合格。
+  Lab2:
+    deadline: "2026-09-11T00:00:00+08:00"
+    min_nonempty_lines: 10
+    allow_extra_files: false
+    required_files:
+      - main.c
+      - Lab2.md
+    review_points:
+      - main.c 必须是能够独立编译运行的完整 C 程序，包含 algorithm1 到 algorithm4 四个函数和 main 函数，使用循环依次对 2048、4096、8192、16384 四个输入规模调用每个函数并输出操作次数，操作次数使用 long long 保存。
+      - main.c 不得把操作次数写死在 printf 中，不得复制四份相同代码代替循环，不得使用 clock、time 等计时函数，不得使用 C++ 的 iostream、cout 或其他 C++ 功能。
+      - Lab2.md 必须保留题目结构，每道单项选择题必须且只能有一个选项被改为 [x]，不能全部不选或多选；实验数据表格四行数据不能留空；3.3 的原因填写位置必须填写实际原因或“无”。
+      - 只检查是否完成作答和程序是否完整，不判断选项、实验数据和程序结果是否正确。
