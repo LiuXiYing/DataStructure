@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 long long algorithm1(int n) {
     long long count = 0;
     int i;
