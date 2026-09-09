@@ -132,7 +132,7 @@ n	Algorithm 1	Algorithm 2	Algorithm 3	Algorithm 4
 
  [x]A. 一致
  [ ]B. 不一致
-如果选择“不一致”，请检查程序和选择题答案，并在下面说明原因：
+
 
 无
 
