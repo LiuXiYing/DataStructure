@@ -1,3 +1,4 @@
+#include <iostream>
 
 bool getDoubled(int value, int& result) {
     result = value * 2;
