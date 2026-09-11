@@ -10,41 +10,31 @@ int removeAt(SeqList *list, int index, int *removed);
 int main() {
     SeqList list;
     list.size=4;
-    int i,j;
+    int i;
     list.data[0]=10;
     for (int i=1;i<list.size;i++)
         list.data[i]=10*(i+1);
     printf("初始：");
-    for (int j=0;j<list.size;j++)
-        printf("%d ",list.data[j]);
-    printf("\n");
+    printList(&list);
     int t=insertAt(&list, 2, 25);
     printf("insertAt(2, 25) 返回%d\n",t);
-    for (int i=0;i<list.size;i++)
-        printf("%d ",list.data[i]);
-    printf("\n");
+    printList(&list);
     int removed=0;
     int u=removeAt(&list, 1, &removed);
     printf("removeAt(1) 返回%d,删除的值是%d\n",u,removed);
-    for (i=0;i<list.size;i++)
-        printf("%d ",list.data[i]);
-    printf("\n");
+    printList(&list);
     int y=insertAt(&list, 10, 99);
     printf("insertAt(10, 99) 返回%d\n",y);
-    for (i=0;i<list.size;i++)
-        printf("%d ",list.data[i]);
-    printf("\n");
+    printList(&list);
     int h=removeAt(&list, 4, &removed);
     printf("removeAt(4) 返回%d\n",h);
-    for (i=0;i<list.size;i++)
-        printf("%d ",list.data[i]);
-    printf("\n");
+    printList(&list);
     return 0;
 }
 void printList(const SeqList *list) {
     for (int i=0; i<list->size; i++) {
         printf("%d ", list->data[i]);
-    }
+    }printf("\n");
 }
 int insertAt(SeqList *list, int index, int value) {
     if (list->size==MAX_SIZE || index > list->size) {
