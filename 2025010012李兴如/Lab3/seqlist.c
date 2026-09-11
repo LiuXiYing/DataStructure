@@ -47,7 +47,7 @@ void printList(const SeqList *list) {
     }
 }
 int insertAt(SeqList *list, int index, int value) {
-    if (list->size==MAX_SIZE || index > list->size-1) {
+    if (list->size==MAX_SIZE || index > list->size) {
         return 0;
     }
     else {
