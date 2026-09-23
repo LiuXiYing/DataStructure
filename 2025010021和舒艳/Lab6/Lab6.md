@@ -933,11 +933,11 @@ Resume 到第三个断点，程序停在 `listRemove` 的 `free(p);` 上，这�
 
 | 记录项目 | 图 A：前驱还没改 | 图 B：前驱改完 | 图 C：已断链、尚未释放 |
 | :--- | :--- | :--- | :--- |
-| `p` 的地址 | 0x1e1840 | 0x1e1840 |0x1e1740 |
-| `p->data` | 25 |25 | -1 |
-| `p->next` 的地址 | 0x1e1780  | 0x1e1780 | 0x1e1840|
-| `prev->next` 的地址（图 C 填 `list->head->next`） | 0x1e1780  | 0x1e1840  |0x1e1700|
-| `list->size` | 5 |6| 5 |
+| `p` 的地址 | 0x1b15d0 | 0x1b15d0 | 0x1b1580 |
+| `p->data` | 18 | 18 | 25 |
+| `p->next` 的地址 | 0xbaadf00d | 0xbaadf00d | 0x1b15f0 |
+| `prev->next` 的地址（图 C 填 `list->head->next`） | 0x1b15c0 | 0x1b15d0 | 0x1b1590 |
+| `list->size` | 4 | 5 | 6 |
 
 回答下面两个问题：
 
