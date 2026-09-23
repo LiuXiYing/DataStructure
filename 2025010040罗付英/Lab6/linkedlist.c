@@ -1,24 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* ½áµã£ºÓë¿ÎÌÃÉÏĞ´µÄÍêÈ«ÏàÍ¬£¬²»µÃĞŞ¸Ä */
+/* ç»“ç‚¹ï¼šä¸è¯¾å ‚ä¸Šå†™çš„å®Œå…¨ç›¸åŒï¼Œä¸å¾—ä¿®æ”¹ */
 typedef struct Node {
-    int data;           /* Êı¾İÓò£º±£´æÒ»¸öÕûÊı */
-    struct Node* next;  /* Ö¸ÕëÓò£º±£´æÏÂÒ»¸ö½áµãµÄµØÖ·£¬NULL ±íÊ¾Ã»ÓĞºó¼Ì */
+    int data;           /* æ•°æ®åŸŸï¼šä¿å­˜ä¸€ä¸ªæ•´æ•° */
+    struct Node* next;  /* æŒ‡é’ˆåŸŸï¼šä¿å­˜ä¸‹ä¸€ä¸ªç»“ç‚¹çš„åœ°å€ï¼ŒNULL è¡¨ç¤ºæ²¡æœ‰åç»§ */
 } Node;
 
-/* Á´±í£ºÍ·ÉÚ±øµÄµØÖ·ºÍÓĞĞ§½áµã¸öÊı´ò°üÔÚÒ»Æğ¡£
- * Óë Lab3 µÄ SeqList Ò»Ñù£¬ËùÓĞ²Ù×÷¶¼Í¨¹ı LinkedList* ²ÎÊı·ÃÎÊËüÃÇ */
+/* é“¾è¡¨ï¼šå¤´å“¨å…µçš„åœ°å€å’Œæœ‰æ•ˆç»“ç‚¹ä¸ªæ•°æ‰“åŒ…åœ¨ä¸€èµ·ã€‚
+ * ä¸ Lab3 çš„ SeqList ä¸€æ ·ï¼Œæ‰€æœ‰æ“ä½œéƒ½é€šè¿‡ LinkedList* å‚æ•°è®¿é—®å®ƒä»¬ */
 typedef struct {
-    Node* head;         /* Í·ÉÚ±ø£¬data ²»Ê¹ÓÃ */
-    int size;           /* ÓĞĞ§½áµã¸öÊı£¬²»º¬ÉÚ±ø */
+    Node* head;         /* å¤´å“¨å…µï¼Œdata ä¸ä½¿ç”¨ */
+    int size;           /* æœ‰æ•ˆç»“ç‚¹ä¸ªæ•°ï¼Œä¸å«å“¨å…µ */
 } LinkedList;
 
 /* --------------------------------------------------------------------------
- * ½ÌÊ¦Ìá¹©£º½áµã¼¶²Ù×÷£¬¿ÎÌÃ´úÂëÔ­Ñù°áÀ´£¬²»µÃĞŞ¸Ä
+ * æ•™å¸ˆæä¾›ï¼šç»“ç‚¹çº§æ“ä½œï¼Œè¯¾å ‚ä»£ç åŸæ ·æ¬æ¥ï¼Œä¸å¾—ä¿®æ”¹
  * -------------------------------------------------------------------------- */
 
-/* ÉêÇëÒ»¸ö´æ·Å value µÄĞÂ½áµã¡£ËüµÄÊÙÃü²»ÓÉ×÷ÓÃÓò¾ö¶¨£¬¶øÓÉ free ¾ö¶¨ */
+/* ç”³è¯·ä¸€ä¸ªå­˜æ”¾ value çš„æ–°ç»“ç‚¹ã€‚å®ƒçš„å¯¿å‘½ä¸ç”±ä½œç”¨åŸŸå†³å®šï¼Œè€Œç”± free å†³å®š */
 static Node* newNode(int value) {
     Node* p = (Node*)malloc(sizeof(Node));
     if (p == NULL) {
@@ -30,7 +30,7 @@ static Node* newNode(int value) {
     return p;
 }
 
-/* ÔÚ prev ºóÃæ²åÈëÒ»¸ö´æ value µÄĞÂ½áµã£¬·µ»ØĞÂ½áµã¡£¿ÎÌÃÉÏµÄÁ½¾ä */
+/* åœ¨ prev åé¢æ’å…¥ä¸€ä¸ªå­˜ value çš„æ–°ç»“ç‚¹ï¼Œè¿”å›æ–°ç»“ç‚¹ã€‚è¯¾å ‚ä¸Šçš„ä¸¤å¥ */
 static Node* insertAfter(Node* prev, int value) {
     Node* p = newNode(value);
     p->next = prev->next;
@@ -38,7 +38,7 @@ static Node* insertAfter(Node* prev, int value) {
     return p;
 }
 
-/* ÕªÏÂ prev ºóÃæµÄ½áµã²¢·µ»ØËü£¬Ö»¸ÄÖ¸Õë£¬²»ÊÍ·Å */
+/* æ‘˜ä¸‹ prev åé¢çš„ç»“ç‚¹å¹¶è¿”å›å®ƒï¼Œåªæ”¹æŒ‡é’ˆï¼Œä¸é‡Šæ”¾ */
 static Node* unlinkAfter(Node* prev) {
     Node* p = prev->next;
     if (p != NULL) {
@@ -47,7 +47,7 @@ static Node* unlinkAfter(Node* prev) {
     return p;
 }
 
-/* ÖÈÎª rank µÄ½áµãµÄÇ°Çı£»rank == 0 Ê±ÊÇÉÚ±ø±¾Éí¡£´ÓÉÚ±ø³ö·¢×ß rank ²½ */
+/* ç§©ä¸º rank çš„ç»“ç‚¹çš„å‰é©±ï¼›rank == 0 æ—¶æ˜¯å“¨å…µæœ¬èº«ã€‚ä»å“¨å…µå‡ºå‘èµ° rank æ­¥ */
 static Node* prevOf(const LinkedList* list, int rank) {
     Node* p = list->head;
     for (int i = 0; i < rank; i++) {
@@ -57,21 +57,21 @@ static Node* prevOf(const LinkedList* list, int rank) {
 }
 
 /* --------------------------------------------------------------------------
- * ½ÌÊ¦Ìá¹©£º½¨Á¢ÓëÏú»Ù
+ * æ•™å¸ˆæä¾›ï¼šå»ºç«‹ä¸é”€æ¯
  * -------------------------------------------------------------------------- */
 
-/* ½¨Á¢¿Õ±í£ºÁ¢ÉÚ±ø¡£¶ÔÓ¦¿ÎÌÃÉÏ main ¿ªÍ·µÄ head = newNode(0) */
+/* å»ºç«‹ç©ºè¡¨ï¼šç«‹å“¨å…µã€‚å¯¹åº”è¯¾å ‚ä¸Š main å¼€å¤´çš„ head = newNode(0) */
 void listInit(LinkedList* list) {
     list->head = newNode(0);
     list->size = 0;
 }
 
-/* ÊÍ·ÅÕûÌõÁ´£¬ÉÚ±øÒ²ÔÚÁ´ÉÏ¡£Ä©Î²µÄÊä³öÊÇÑéÖ¤ÊÖ¶Î£¬Ô­Ñù±£Áô */
+/* é‡Šæ”¾æ•´æ¡é“¾ï¼Œå“¨å…µä¹Ÿåœ¨é“¾ä¸Šã€‚æœ«å°¾çš„è¾“å‡ºæ˜¯éªŒè¯æ‰‹æ®µï¼ŒåŸæ ·ä¿ç•™ */
 void listDestroy(LinkedList* list) {
     int count = 0;
     Node* p = list->head;
     while (p != NULL) {
-        Node* next = p->next;   /* ÏÈ¼Ç×¡ÏÂÒ»¸ö£¬ÔÙ free µ±Ç°Õâ¸ö */
+        Node* next = p->next;   /* å…ˆè®°ä½ä¸‹ä¸€ä¸ªï¼Œå† free å½“å‰è¿™ä¸ª */
         free(p);
         p = next;
         count++;
@@ -90,21 +90,21 @@ int listEmpty(const LinkedList* list) {
 }
 
 /* --------------------------------------------------------------------------
- * Ñ§ÉúÁ·Ï°
+ * å­¦ç”Ÿç»ƒä¹ 
  * -------------------------------------------------------------------------- */
 
-/* Á·Ï° 1£ºÊä³ö¡£´ÓµÚÒ»¸öÓĞĞ§½áµã¿ªÊ¼Êä³ö£¬ÉÚ±ø²»Êä³ö£¬Ã¿¸öÊıºóÃæÒ»¸ö¿Õ¸ñ£¬Ä©Î²»»ĞĞ */
+/* ç»ƒä¹  1ï¼šè¾“å‡ºã€‚ä»ç¬¬ä¸€ä¸ªæœ‰æ•ˆç»“ç‚¹å¼€å§‹è¾“å‡ºï¼Œå“¨å…µä¸è¾“å‡ºï¼Œæ¯ä¸ªæ•°åé¢ä¸€ä¸ªç©ºæ ¼ï¼Œæœ«å°¾æ¢è¡Œ */
 void listPrint(const LinkedList* list) {
     printf("[size = %d] ", list->size);
     for (const Node* p = list->head->next; p != NULL; p = p->next) {
         printf("%d ",p->data);
     }
-    /* TODO£ºfor (const Node* p = list->head->next; p != NULL; p = p->next) */
+    /* TODOï¼šfor (const Node* p = list->head->next; p != NULL; p = p->next) */
     printf("\n");
 }
 
-/* Á·Ï° 2£ºÔÚÖÈ rank ´¦²åÈë value£¬ºÏ·¨·¶Î§ 0 <= rank <= size
- * ³É¹¦·µ»Ø 1 ²¢ÈÃ size ¼ÓÒ»£»rank ·Ç·¨·µ»Ø 0£¬Á´±í²»±ä */
+/* ç»ƒä¹  2ï¼šåœ¨ç§© rank å¤„æ’å…¥ valueï¼Œåˆæ³•èŒƒå›´ 0 <= rank <= size
+ * æˆåŠŸè¿”å› 1 å¹¶è®© size åŠ ä¸€ï¼›rank éæ³•è¿”å› 0ï¼Œé“¾è¡¨ä¸å˜ */
 int listInsert(LinkedList* list, int rank, int value) {
     if (rank<0 || rank>list->size) {
         return 0;
@@ -112,21 +112,21 @@ int listInsert(LinkedList* list, int rank, int value) {
     insertAfter(prevOf(list,rank),value);
     list->size++;
 
-    return 1;   /* TODO£º¼ì²é rank£»insertAfter(prevOf(list, rank), value)£»size ¼ÓÒ» */
+    return 1;   /* TODOï¼šæ£€æŸ¥ rankï¼›insertAfter(prevOf(list, rank), value)ï¼›size åŠ ä¸€ */
 }
 
-/* Á·Ï° 3£ºË³Ğò×·¼ÓÓë±íÍ·²åÈë£¬¶¼¸´ÓÃ listInsert£¬²»µÃÁíĞ´½ÓÁ´´úÂë */
+/* ç»ƒä¹  3ï¼šé¡ºåºè¿½åŠ ä¸è¡¨å¤´æ’å…¥ï¼Œéƒ½å¤ç”¨ listInsertï¼Œä¸å¾—å¦å†™æ¥é“¾ä»£ç  */
 int listPushBack(LinkedList* list, int value) {
-    return listInsert(list,list->size,value);   /* TODO£ºlistInsert(list, list->size, value) */
+    return listInsert(list,list->size,value);   /* TODOï¼šlistInsert(list, list->size, value) */
 }
 
 int listPushFront(LinkedList* list, int value) {
-    return listInsert(list,0,value);   /* TODO£ºlistInsert(list, 0, value) */
+    return listInsert(list,0,value);   /* TODOï¼šlistInsert(list, 0, value) */
 }
 
-/* Á·Ï° 4£ºÉ¾³ıÖÈ rank ´¦µÄ½áµã£¬±»É¾µÄÖµĞ´Èë *value£¬ºÏ·¨·¶Î§ 0 <= rank < size
- * ³É¹¦·µ»Ø 1 ²¢ÈÃ size ¼õÒ»£»Ê§°Ü·µ»Ø 0 ÇÒ²»ĞŞ¸Ä *value
- * ±ØĞëÓÃ¾Ö²¿±äÁ¿ p ½Ó×¡ unlinkAfter µÄ·µ»ØÖµ£¬²¢µ¥¶ÀÒ»ĞĞĞ´ free(p);£¨3.5 µÄ¶ÏµãÉèÔÚÕâÒ»ĞĞ£© */
+/* ç»ƒä¹  4ï¼šåˆ é™¤ç§© rank å¤„çš„ç»“ç‚¹ï¼Œè¢«åˆ çš„å€¼å†™å…¥ *valueï¼Œåˆæ³•èŒƒå›´ 0 <= rank < size
+ * æˆåŠŸè¿”å› 1 å¹¶è®© size å‡ä¸€ï¼›å¤±è´¥è¿”å› 0 ä¸”ä¸ä¿®æ”¹ *value
+ * å¿…é¡»ç”¨å±€éƒ¨å˜é‡ p æ¥ä½ unlinkAfter çš„è¿”å›å€¼ï¼Œå¹¶å•ç‹¬ä¸€è¡Œå†™ free(p);ï¼ˆ3.5 çš„æ–­ç‚¹è®¾åœ¨è¿™ä¸€è¡Œï¼‰ */
 int listRemove(LinkedList* list, int rank, int* value) {
     if (rank<0 || rank>=list->size) {
         return 0;
@@ -136,10 +136,10 @@ int listRemove(LinkedList* list, int rank, int* value) {
     free(p);
     list->size--;
     return 1;
-       /* TODO£º¼ì²é rank£»Node* p = unlinkAfter(prevOf(list, rank))£»È¡³ö data£»free(p)£»size ¼õÒ» */
+       /* TODOï¼šæ£€æŸ¥ rankï¼›Node* p = unlinkAfter(prevOf(list, rank))ï¼›å–å‡º dataï¼›free(p)ï¼›size å‡ä¸€ */
 }
 
-/* Á·Ï° 5£º°´ÖÈ¶ÁÈ¡£¬ºÏ·¨·¶Î§ 0 <= rank < size£»Ê§°ÜÊ±²»ĞŞ¸Ä *value */
+/* ç»ƒä¹  5ï¼šæŒ‰ç§©è¯»å–ï¼Œåˆæ³•èŒƒå›´ 0 <= rank < sizeï¼›å¤±è´¥æ—¶ä¸ä¿®æ”¹ *value */
 int listGet(const LinkedList* list, int rank, int* value) {
     if (rank<0 || rank>=list->size) {
         return 0;
@@ -152,7 +152,7 @@ int listGet(const LinkedList* list, int rank, int* value) {
      /* TODO */
 }
 
-/* Á·Ï° 6£º°´Öµ²éÕÒ£¬·µ»ØµÚÒ»´Î³öÏÖµÄÖÈ£¬ÕÒ²»µ½·µ»Ø -1¡£´Ó head->next ¿ªÊ¼Êı£¬ÖÈ´Ó 0 Æğ */
+/* ç»ƒä¹  6ï¼šæŒ‰å€¼æŸ¥æ‰¾ï¼Œè¿”å›ç¬¬ä¸€æ¬¡å‡ºç°çš„ç§©ï¼Œæ‰¾ä¸åˆ°è¿”å› -1ã€‚ä» head->next å¼€å§‹æ•°ï¼Œç§©ä» 0 èµ· */
 int listFind(const LinkedList* list, int value) {
     int x=0;
     for (Node* p = list->head->next; p != NULL; p = p->next) {
@@ -164,7 +164,7 @@ int listFind(const LinkedList* list, int value) {
     return -1;  /* TODO */
 }
 
-/* ²âÊÔË³ĞòÓë½²Òå¸½Â¼Ò»¡¢Lab4 µÄÏòÁ¿ÍêÈ«Ò»ÖÂ£¬·½±ãÖğĞĞ¶ÔÕÕ */
+/* æµ‹è¯•é¡ºåºä¸è®²ä¹‰é™„å½•ä¸€ã€Lab4 çš„å‘é‡å®Œå…¨ä¸€è‡´ï¼Œæ–¹ä¾¿é€è¡Œå¯¹ç…§ */
 int main(void) {
     LinkedList list;
     listInit(&list);
@@ -172,7 +172,7 @@ int main(void) {
     listPrint(&list);
     printf("listEmpty = %d, listSize = %d\n\n", listEmpty(&list), listSize(&list));
 
-    /* 1. ÒÀ´Î×·¼ÓÎå¸öÑùÀıÔªËØ */
+    /* 1. ä¾æ¬¡è¿½åŠ äº”ä¸ªæ ·ä¾‹å…ƒç´  */
     int samples[] = {18, -1, 42, 18, 65};
     for (int i = 0; i < 5; i++) {
         listPushBack(&list, samples[i]);
@@ -181,37 +181,37 @@ int main(void) {
     listPrint(&list);
     printf("\n");
 
-    /* 2. ÔÚÖÈ 2 ´¦²åÈë 25 */
+    /* 2. åœ¨ç§© 2 å¤„æ’å…¥ 25 */
     int ok = listInsert(&list, 2, 25);
     printf("listInsert(2, 25): ok = %d, ", ok);
     listPrint(&list);
 
-    /* 3. É¾³ıÖÈ 1 ´¦µÄÔªËØ£¬²¢Êä³ö±»É¾³ıµÄÖµ */
+    /* 3. åˆ é™¤ç§© 1 å¤„çš„å…ƒç´ ï¼Œå¹¶è¾“å‡ºè¢«åˆ é™¤çš„å€¼ */
     int removed = 777;
     ok = listRemove(&list, 1, &removed);
     printf("listRemove(1): ok = %d, removed = %d, ", ok, removed);
     listPrint(&list);
 
-    /* 4. ÔÚ±íÍ·²åÈë 7 */
+    /* 4. åœ¨è¡¨å¤´æ’å…¥ 7 */
     ok = listPushFront(&list, 7);
     printf("listPushFront(7): ok = %d, ", ok);
     listPrint(&list);
     printf("\n");
 
-    /* 5. °´ÖÈ¶ÁÈ¡£ººÏ·¨µÄÖÈÓëÔ½½çµÄÖÈ */
+    /* 5. æŒ‰ç§©è¯»å–ï¼šåˆæ³•çš„ç§©ä¸è¶Šç•Œçš„ç§© */
     int value = 777;
     ok = listGet(&list, 0, &value);
     printf("listGet(0): ok = %d, value = %d\n", ok, value);
     value = 777;
-    ok = listGet(&list, 6, &value);     /* ´Ë¿Ì size = 6£¬ÖÈ 6 ÒÑÔ½½ç */
+    ok = listGet(&list, 6, &value);     /* æ­¤åˆ» size = 6ï¼Œç§© 6 å·²è¶Šç•Œ */
     printf("listGet(6): ok = %d, value = %d\n\n", ok, value);
 
-    /* 6. °´Öµ²éÕÒ£ºÖØ¸´ÔªËØÖ»·µ»ØµÚÒ»´Î³öÏÖµÄÖÈ */
+    /* 6. æŒ‰å€¼æŸ¥æ‰¾ï¼šé‡å¤å…ƒç´ åªè¿”å›ç¬¬ä¸€æ¬¡å‡ºç°çš„ç§© */
     printf("listFind(42) = %d\n", listFind(&list, 42));
     printf("listFind(18) = %d\n", listFind(&list, 18));
     printf("listFind(99) = %d\n\n", listFind(&list, 99));
 
-    /* 7. ·Ç·¨Î»ÖÃ£º¸ºÖÈ¡¢³¬¹ı size µÄÖÈ¡¢É¾³ı¿Õ±í */
+    /* 7. éæ³•ä½ç½®ï¼šè´Ÿç§©ã€è¶…è¿‡ size çš„ç§©ã€åˆ é™¤ç©ºè¡¨ */
     ok = listInsert(&list, -1, 100);
     printf("listInsert(-1, 100): ok = %d\n", ok);
     ok = listInsert(&list, 100, 100);
@@ -222,7 +222,7 @@ int main(void) {
     ok = listRemove(&empty, 0, &removed);
     printf("empty listRemove(0): ok = %d\n\n", ok);
 
-    /* 8. ÊÕÎ²£ºC ÓïÑÔÃ»ÓĞÎö¹¹º¯Êı£¬ÊÍ·Å±ØĞë×Ô¼ºĞ´ */
+    /* 8. æ”¶å°¾ï¼šC è¯­è¨€æ²¡æœ‰ææ„å‡½æ•°ï¼Œé‡Šæ”¾å¿…é¡»è‡ªå·±å†™ */
     printf("before destroy: ");
     listPrint(&list);
     printf("destroy by hand before main ends, empty first, then list:\n");
