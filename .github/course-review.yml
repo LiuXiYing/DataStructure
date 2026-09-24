@@ -12,7 +12,8 @@ features:
   comment_review: true
   close_late_pr: true
   ai_review: true
-  ocr_review: true
+  ai_feedback: true
+  ocr_review: false
   vision_review: true
   metrics: true
 
@@ -22,12 +23,22 @@ defaults:
   late_close_after_days: 7
 
 ai:
-  model: glm-4.7-flash
+  providers:
+    - provider: glm
+      model: glm-4.7-flash
+    - provider: gemini
+      model: gemini-3.5-flash-lite
+  consensus_rounds: 3
   min_confidence: 0.8
   timeout_seconds: 60
-  max_attempts: 3
+  max_attempts: 5
   max_file_bytes: 200000
   max_total_bytes: 500000
+  max_output_tokens: 2048
+
+feedback:
+  timeout_seconds: 20
+  max_input_bytes: 100000
   max_output_tokens: 2048
 
 ocr:
@@ -37,17 +48,22 @@ ocr:
   max_text_chars: 20000
 
 vision:
-  model: glm-4.6v-flash
+  providers:
+    - provider: glm
+      model: glm-4.1v-thinking-flash
+    - provider: gemini
+      model: gemini-3.5-flash-lite
+  consensus_rounds: 3
   min_confidence: 0.85
   fail_confidence: 0.9
   timeout_seconds: 90
-  max_attempts: 3
+  max_attempts: 5
   max_images: 6
   max_image_bytes: 5000000
   max_total_bytes: 12000000
   max_pixels: 25000000
   max_side: 4096
-  max_output_tokens: 2048
+  max_output_tokens: 4096
 
 # 发布作业时在这里追加 Lab1、Lab2 等配置。
 # required_files 为相对学生作业目录的精确文件名；vision_files 支持 fnmatch 通配符。
@@ -67,6 +83,190 @@ assignments:
     review_points:
       - helloworld.c 必须是能够独立编译的 C 程序，使用 stdio.h、int main(void) 和 printf，只输出一行 Hello, World!，输出末尾包含换行符，并正常返回 0。
       - helloworld.c 不得使用 C++ 的 iostream、cout 或其他与 C 源文件类型不符的内容，也不得保留无关示例代码。
-      - clion-toolchain.png 必须清晰显示 CLion 的 Toolchains 设置页面、当前工具链名称，以及已被正确识别且没有红色错误提示的 CMake、Build Tool、C Compiler 和 Debugger。
-      - 截图必须能清晰确认 CLion 窗口、项目树中的 helloworld.c、编辑器中的完整 C 源代码、Run 窗口输出 Hello, World!，以及程序以退出码 0 正常结束。
+    vision_review_points:
+      - 忽略截图中的一切警告、提示、弃用说明和黄色感叹号图标，它们不构成不合格；只有红色错误提示才算问题。
+      - clion-toolchain.png 必须清晰显示 CLion 的 Toolchains 设置页面、当前工具链名称，以及 CMake、Build Tool、C Compiler 和 Debugger 均已填入具体路径或版本而非留空。
+      - 截图必须能清晰确认 CLion 窗口、项目树中的 C 源文件（文件名为 helloworld.c 或 main.c 均可）、编辑器中的完整 C 源代码、Run 窗口输出 Hello, World!，以及程序以退出码 0 正常结束。
       - 截图必须来自学生本人的电脑环境并使用电脑截图功能；出现手机拍摄造成的反光、摩尔纹、明显倾斜或文字无法辨认时判为不合格。
+  Lab2:
+    deadline: "2026-09-11T00:00:00+08:00"
+    min_nonempty_lines: 10
+    allow_extra_files: false
+    required_files:
+      - main.c
+      - Lab2.md
+    review_points:
+      - main.c 必须是能够独立编译运行的完整 C 程序，包含 algorithm1 到 algorithm4 四个函数和 main 函数，使用循环依次对 2048、4096、8192、16384 四个输入规模调用每个函数并输出操作次数，操作次数使用 long long 保存。
+      - main.c 不得把操作次数写死在 printf 中，不得复制四份相同代码代替循环，不得使用 clock、time 等计时函数，不得使用 C++ 的 iostream、cout 或其他 C++ 功能。
+      - Lab2.md 必须保留题目结构，每道单项选择题必须且只能有一个选项被改为 [x]，不能全部不选或多选；实验数据表格四行数据不能留空；3.3 的原因填写位置必须填写实际原因或“无”。
+      - 只检查是否完成作答和程序是否完整，不判断选项、实验数据和程序结果是否正确。
+  Lab3:
+    deadline: "2026-09-15T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    required_files:
+      - CMakeLists.txt
+      - hello.cpp
+      - seqlist.c
+      - Lab3.md
+    review_points:
+      - CMakeLists.txt 必须用 project 同时声明 C 和 CXX，并且有且只有两个 add_executable，目标 lab3_cpp 对应 hello.cpp，目标 lab3_c 对应 seqlist.c。
+      - hello.cpp 必须是能够独立编译运行的完整 C++ 程序，只使用 iostream，用 std::cout 输出姓名、学号和一个 bool 变量的值，并实现引用参数版本 bool getDoubled(int value, int& result) 且在 main 中调用；不得使用 printf，第二个参数不得改成指针。
+      - seqlist.c 必须是能够独立编译运行的完整 C 程序，只使用 stdio.h，包含 MAX_SIZE 为 100 的 SeqList 结构体，以及 printList、insertAt、removeAt 三个函数，函数通过 SeqList* 参数访问 data 和 size，removeAt 通过指针参数传回被删除的值；main 中依次完成初始化、insertAt(2, 25)、removeAt(1)、insertAt(10, 99)、removeAt(4) 并输出；不得使用 iostream、cout、bool 或 stdbool.h，不得把结果写死在 printf 中。
+      - Lab3.md 必须保留题目结构，每道单项选择题必须且只能有一个选项被改为 [x]，不能全部不选或多选；4.11 和 4.12 两处填空不能留空，4.11 选择“一致”时填写“无”。
+      - 只检查是否完成作答和程序是否完整，不判断选项、程序输出和文字回答是否正确。
+  Lab4:
+    deadline: "2026-09-18T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    required_files:
+      - CMakeLists.txt
+      - intvector.cpp
+      - Lab4.md
+    review_points:
+      - CMakeLists.txt 必须用 project 声明 C 和 CXX，并且有且只有一个 add_executable，目标 lab4_cpp 对应 intvector.cpp。
+      - intvector.cpp 必须是能够独立编译运行的完整 C++ 程序，只使用 iostream，包含 MAX_SIZE 为 100 的 class IntVector，数据成员 data 和 size 位于 private 下，包含构造函数 IntVector() 以及 getSize、empty、get、find、insert、remove、print 七个 public 成员函数，函数体写在类内且不能仍是框架中的 TODO 占位实现；main 与题目给出的一致，依次完成 4 次 insert 建表、insert(2, 25)、remove(1)、insert(10, 99)、remove(4)、get(2)、get(4)、find(30)、find(99)，以及第二个对象 other 的 insert 和 print 并输出。
+      - intvector.cpp 不得把数据成员改为 public 或删除 private，不得在类外直接访问 data 或 size，不得使用 printf、std::vector、new、delete 或全局变量，不得把输出结果写死在 cout 中，输出参数必须是引用 int& 而不是指针。
+      - Lab4.md 必须保留题目结构，每道单项选择题必须且只能有一个选项被改为 [x]，不能全部不选或多选；4.11 的填空不能留空，选择“一致”时填写“无”；4.12 的对应表右列至少填写三行；4.13 的填空不能留空。
+      - 只检查是否完成作答和程序是否完整，不判断选项、程序输出和文字回答是否正确。
+  Lab5:
+    deadline: "2026-09-22T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: true
+    required_files:
+      - CMakeLists.txt
+      - intvector.cpp
+      - Lab5.md
+      - imgs/memory_before.png
+      - imgs/memory_copied.png
+      - imgs/memory_after.png
+    vision_files:
+      - imgs/memory_before.png
+      - imgs/memory_copied.png
+      - imgs/memory_after.png
+    required_address_cells:
+      - file: Lab5.md
+        section: "3.6.4"
+        row: "当前 data 地址（图 C 为 v.data）"
+        columns: [1, 2, 3]
+      - file: Lab5.md
+        section: "3.6.4"
+        row: "newData 地址"
+        columns: [2]
+    review_points:
+      - >-
+        CMakeLists.txt 必须用 project 声明 C 和 CXX，设置 C++17，且有且只有一个 add_executable，目标 lab5_cpp 对应 intvector.cpp。
+      - >-
+        intvector.cpp 必须是完整的 C++ 程序，包含 class IntVector，三个数据成员 int* data、int size、int capacity 和 expand() 位于 private 下；public 下包含接收默认初始容量 4 的构造函数、析构函数，以及 getSize、getCapacity、empty、get、find、insert、remove、pushBack、print。所有函数体写在类内，不能仍是 TODO 或仅保留框架占位实现。
+      - >-
+        构造函数和 expand 中须有动态数组申请，析构函数和 expand 中须有数组释放代码；pushBack 通过 insert(size, value) 追加；保留 IntVector(const IntVector&) = delete 和 IntVector& operator=(const IntVector&) = delete 两行。输出参数保持引用 int&，查询函数保留 const。
+      - >-
+        main 必须保留题目给出的完整测试流程，包括空表 get/remove、追加 10/20/30/40、满表 insert(5, 99)、追加 50、表头插入 5、中间插入 25、表尾插入 60、满表 insert(4, 28)、三种位置删除、get/find 与非法操作、六次删除清空后追加 -1，以及 small(0) 追加两个 7 和 negative(-3) 的独立对象测试；不得硬编码运行结果代替成员函数调用。
+      - >-
+        intvector.cpp 只能包含 iostream，不得使用 printf、std::vector、malloc/free/realloc、全局变量或固定大数组代替动态扩容；不得把私有成员改成 public 或在类外源码中直接访问它们。Lab5.md 中记录调试器看到的私有成员不属于源码违规。
+      - >-
+        Lab5.md 必须保留题目结构，4.1 到 4.11 每题必须且只能选择一个 [x]；4.11 填写原因或“无”；4.12 六行三个数据列全部填写；4.13 至少 30 字；3.6.2 的三处 Markdown 图片引用必须保留且路径与 imgs/ 下的文件名一致；3.6.4 的观察记录填完表中要求填写的 data 与 newData 地址、size、capacity，以及 sizeof(int)、两种容量的字节数和不少于 20 字的解释，明确标为不填写的格子除外。
+      - >-
+        3.6.4 的 data 地址行中图 A、B、C 三格，以及 newData 地址行中图 B 一格，必须各自填写实际十六进制地址。空白、下划线、填写、（填写）、待填写等占位内容均不算完成；不能用其他位置的示例地址代替。newData 在图 A、C 中明确标注不填写的两格除外。
+      - >-
+        本文本阶段只检查程序、接口结构和作答完整性，不判断选项、运行结果、观察记录或解释是否正确，不根据截图下结论；Memory View 的内存地址与十六进制数据由独立图片阶段检查。不得把报告中的详细调试步骤追加为截图验收条件。
+    vision_review_points:
+      - >-
+        只按三张真实 Memory View 截图中可读的内存地址和十六进制数据验收。无需展示当前代码行、停止位置、Variables/Watches、size、capacity、newCapacity、展开的 this 或 v、指针变量及 sizeof(int)。不得额外要求这些界面元素。仅有代码、菜单或 Run 输出且没有内存地址和字节不满足要求。
+      - >-
+        memory_before.png：内存视图能看清旧数组地址，以及从该地址开始的四个整数 10、20、30、40 的十六进制内容，即满足第一张图的要求。
+      - >-
+        memory_copied.png：内存视图能看清与第一张图不同的新数组地址，以及该新地址处的四个整数 10、20、30、40 的十六进制内容，即满足第二张图的要求。无需同时显示旧地址或两个指针变量。
+      - >-
+        memory_after.png：内存视图仍为第二张图的新数组地址，在原有 10、20、30、40 后能看清追加的 50 的十六进制内容，即满足第三张图的要求。
+      - >-
+        地址以实际内存数据所在行的数值为准，允许大小写、前导零和分组差异，无需与教师或其他人的地址相同。地址输入框或表达式即使显示 No symbol、求值错误、已离开作用域等提示，只要下方仍清楚显示满足要求的地址和字节，就不能据此拒绝或声称数组内容未显示。
+      - >-
+        按字节序和分组识别整数：常见四字节 int 小端的 10、20、30、40、50 分别为 0a 00 00 00、14 00 00 00、1e 00 00 00、28 00 00 00、32 00 00 00，也接受等价的整数分组显示。不要把 ASCII 字符栏当作整数。不检查备用位置、全部容量或默认显示范围。
+      - >-
+        允许不同 CLion 版本、操作系统、主题、窗口排列、字节高亮和无关提示。图片须为本人电脑的真实截图；不接受手机拍屏、示意图或拼接修改的结果。只有关键内存地址或字节确实无法辨认、无法确认上述关系时，才因证据不足进入人工复核。
+  Lab6:
+    deadline: "2026-09-29T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: true
+    required_files:
+      - CMakeLists.txt
+      - linkedlist.c
+      - circlist.c
+      - Lab6.md
+      - imgs/insert_before_link.png
+      - imgs/insert_after_link.png
+      - imgs/remove_before_free.png
+    vision_files:
+      - imgs/insert_before_link.png
+      - imgs/insert_after_link.png
+      - imgs/remove_before_free.png
+    required_address_cells:
+      - file: Lab6.md
+        section: "3.5.4"
+        row: "p 的地址"
+        columns: [1, 2, 3]
+      - file: Lab6.md
+        section: "3.5.4"
+        row: "p->next 的地址"
+        columns: [1, 2, 3]
+    review_points:
+      - >-
+        CMakeLists.txt 必须用 project 声明 C 和 CXX，且有且只有两个 add_executable：lab6_list 对应 linkedlist.c，lab6_circ 对应 circlist.c。
+      - >-
+        linkedlist.c 必须是完整的 C 程序，只包含 stdio.h 和 stdlib.h，含 typedef struct Node（int data、struct Node* next）与 typedef struct { Node* head; int size; } LinkedList；保留教师提供的 static 函数 newNode、insertAfter、unlinkAfter、prevOf 和 listInit、listDestroy、listSize、listEmpty；listPrint、listInsert、listPushBack、listPushFront、listRemove、listGet、listFind 的函数体不能仍是 TODO 或仅返回 0/-1 的占位。listInsert 须调用 insertAfter(prevOf(...))，listRemove 须调用 unlinkAfter(prevOf(...)) 并有 free(p)，listPushBack、listPushFront 须调用 listInsert。
+      - >-
+        circlist.c 必须是完整的 C 程序，只包含 stdio.h 和 stdlib.h，含 CircList 结构体；保留教师提供的 newNode、insertAfter、unlinkAfter、prevOf、circInit、circDestroy、circSize；circLast、circEmpty、circPrint、circPushBack、circInsert、circRemove、circFind、circPrintAround、circJosephus 的函数体不能仍是 TODO 占位。circEmpty 须用 head->next 与 head 的指针比较而不是 size；遍历条件应为 != list->head，不得出现 != NULL 的遍历；circJosephus 与 circRemove 中须有 free。
+      - >-
+        两个 main 必须与题目给出的统一 main 一致：linkedlist.c 依次完成 listInit、追加 18/-1/42/18/65、listInsert(2, 25)、listRemove(1)、listPushFront(7)、listGet(0)/listGet(6)、listFind(42/18/99)、非法秩插入、空表删除、两次 listDestroy；circlist.c 依次完成追加 1 到 5、circPrintAround(12)、circInsert(2, 25)、circRemove(2)、circRemove(4)、circPushBack(5)、circPrintAround(7)、查找与非法位置、circJosephus(3)、ring2 的 circJosephus(2)、ring3 的 circJosephus(1)、三次 circDestroy。不得硬编码运行结果代替函数调用。
+      - >-
+        两个 .c 文件不得使用 iostream、cout、bool、new、delete、class 等 C++ 语法，不得使用数组代替链表，不得使用全局变量。
+      - >-
+        Lab6.md 必须保留题目结构，5.1 到 5.13 每题必须且只能选择一个 [x]；5.13 填写原因或“无”；5.14 六轮和最终顺序全部填写；5.15 至少四行；5.16 不少于 60 字；3.5.2 的三处 Markdown 图片引用必须保留且路径与 imgs/ 下的文件名一致；3.5.4 的表格五行三列全部填写，两个问题分别不少于 20 字和 30 字。
+      - >-
+        3.5.4 表格中 p 的地址、p->next 的地址两行的图 A、B、C 共六格必须各自填写实际十六进制地址。空白、下划线、填写、（填写）、待填写等占位内容均不算完成。
+      - >-
+        本文本阶段只检查程序、接口结构和作答完整性，不判断选项、运行结果、观察记录或解释是否正确，不根据截图下结论；调试界面的地址与内存数据由独立图片阶段检查。
+    vision_review_points:
+      - >-
+        只按三张真实 CLion Debug 截图验收，宽松掌握：每张图只要能看到 Debug 状态下的 Variables 面板或 Memory View 中的任意一种，并能辨认出与说明大致对应的指针值或十六进制字节即可。允许不同 CLion 版本、操作系统、主题、窗口排列、Variables 展开层次和行宽；无需展示整个源文件，无需三张图同时展示 Variables 和 Memory View。
+      - >-
+        insert_before_link.png：能看出程序停在 insertAfter 内部或其附近，Variables 中出现 p 或 prev，且能看到 data 为 25 的结点（Variables 中 data = 25，或 Memory View 中 19 00 00 00）即可。
+      - >-
+        insert_after_link.png：能看出 prev 的 next 已是一个地址，或 Memory View 中能看到 -1 结点的 ff ff ff ff 与其后的地址字节即可；不要求与第一张图逐位比对。
+      - >-
+        remove_before_free.png：能看出程序停在 listRemove 内部或其附近，p 的 data 为 -1（Variables 中 data = -1，或 Memory View 中 ff ff ff ff）即可；不要求同时展示 head。
+      - >-
+        不核对三张图之间的地址关系，不要求对齐填充字节内容；地址大小写、前导零、分组差异一律忽略；地址表达式即使显示求值错误，只要下方仍显示字节，就不能据此拒绝。仅有代码、菜单或 Run 输出而没有任何 Debug 面板时不满足要求。
+      - >-
+        图片须为本人电脑的真实截图；不接受手机拍屏、示意图或拼接修改的结果。证据不足时进入人工复核，不直接判定不合格。
+  Lab7:
+    deadline: "2026-10-02T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: false
+    required_files:
+      - CMakeLists.txt
+      - listNode.h
+      - list.h
+      - main.cpp
+      - Lab7.md
+    review_points:
+      - >-
+        CMakeLists.txt 必须用 project 声明 C 和 CXX，设置 C++17，并且有且只有一个 add_executable，目标 lab7_list 对应 main.cpp；listNode.h 与 list.h 不作为源文件列进 add_executable，由 main.cpp 用 #include 引入。
+      - >-
+        三个文件必须在同一目录下能一起编译运行。listNode.h 含 #ifndef LISTNODE_H 头文件卫士、template 声明的 struct ListNode（T data、ListNode<T>* pred、ListNode<T>* succ）、两个构造函数以及 insertAsPred、insertAsSucc 两个成员函数；list.h 含 #ifndef LIST_H 头文件卫士、typedef int Rank、template 声明的 class List。两个头文件都不得出现 using namespace std，也不得包含 iostream 与 listNode.h 之外的头文件。
+      - >-
+        List 类必须有 private、protected、public 三段：_size、header、trailer 三个数据成员在 private 下；init()、clear() 在 protected 下；public 下包含 List、~List、size、empty、first、last、valid、insertAsFirst、insertAsLast、insertA、insertB、remove(ListNode<T>*)、find、operator[]、rankOf、insert(Rank, const T&)、remove(Rank, T&)、get(Rank, T&)、print、printReverse。不得增加或删除数据成员，不得把数据成员改成 public。
+      - >-
+        学生要补的 12 处函数体不能仍是 TODO 或占位返回（return nullptr、return 0、return false、空体都算未完成）：ListNode<T>::insertAsPred、insertAsSucc；List<T>::clear、insertA、insertB、remove(ListNode<T>*)、find、operator[]、insert(Rank, const T&)、remove(Rank, T&)、get(Rank, T&)、printReverse。insertA、insertB 必须调用 p->insertAsSucc(e) 与 p->insertAsPred(e)；remove(ListNode<T>*) 里必须有两句断链、一句 delete p 和 _size 减一；printReverse 的停止条件必须是 p != header，不得用 _size 或计数控制。
+      - >-
+        insert(Rank, const T&) 必须复用 insertB()，且秩等于 _size 时目标位置是 trailer 而不是按秩定位的结果；remove(Rank, T&) 与 get(Rank, T&) 必须复用 operator[]()，越界时返回 false 且不修改引用参数；find 必须从 trailer->pred 出发沿 pred 向前走，走到 header 时返回 nullptr；operator[] 必须从 first() 出发走 r 步，r 越界时返回 nullptr。
+      - >-
+        教师提供的接口必须原样保留：ListNode 的两个构造函数、List::init()、List()、~List()（含 clear()、delete header、delete trailer 三句以及末尾那行输出）、size、empty、first、last、valid、insertAsFirst、insertAsLast、rankOf、print，以及 main.cpp 的全部内容。不得使用 malloc、free、数组、std::list、std::vector 或全局变量，不得把三个文件合并成一个 .cpp，也不得把类定义内联进 main.cpp。
+      - >-
+        Lab7.md 必须保留题目结构，4.1 到 4.6 每题必须且只能选择一个 [x]；4.7 的对照表至少填写四行；4.8 不少于 60 字。本次不要求调试截图，不检查 imgs 目录。
+      - >-
+        本文本阶段只检查三个文件的接口结构、程序完整性与作答完整性，不判断选项、运行结果或解释是否正确。
