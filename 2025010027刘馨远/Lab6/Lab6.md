@@ -469,8 +469,8 @@ Resume 到第三个断点，程序停在 `listRemove` 的 `free(p);` 上，这�
 | :--- | :--- | :--- | :--- |
 | `p` 的地址 | 0x1b15d0 | 0x1b15d0 | 0xb01610 |
 | `p->data` | 18 | 18 | -1 |
-| `p->next`  | NULL | NULL | 0xb01710 |
-| `prev->next` 的地址（图 C 填 `list->head->next`） | NULL | 0x1b1590 | 0xb015d0 |
+| `p->next`  | 0xb01740 | 0xb01740 | 0xb01710 |
+| `prev->next` 的地址（图 C 填 `list->head->next`） | 	0xb01740 | 0x1b1590 | 0xb015d0 |
 | `list->size` | 6 | 6 | 6 |
 
 回答下面两个问题：
