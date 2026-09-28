@@ -141,7 +141,11 @@ int listGet(const LinkedList* list, int rank, int* value) {
     if (rank < 0 || rank >= list->size) {
         return 0;
     }
-    *value = prevOf(list, rank)->next->data;
+    const Node* p = list->head->next;
+    for (int i = 0; i < rank; i++) {
+        p = p->next;
+    }
+    *value = p->data;
     return 1;
 }
 
