@@ -160,13 +160,13 @@ void circPrintAround(const CircList* list, int steps) {
     if (list->size == 0) {
         printf("(empty)");
     } else {
-        const Node* p = list->head;
+        const Node* p = list->head->next;  /* 从第一个有效结点开始 */
         for (int i = 0; i < steps; i++) {
+            printf("%d ", p->data);
             p = p->next;
             if (p == list->head) {
-                p = p->next;
+                p = p->next;  /* 跳过哨兵 */
             }
-            printf("%d ", p->data);
         }
     }
     printf("\n");
@@ -185,11 +185,11 @@ void circJosephus(CircList* list, int k) {
                 prev = prev->next;
             }
         }
-        Node* p = unlinkAfter(list, prev);
-        if (p == NULL) {
+        /* 若走完后 prev->next 是哨兵，说明第 k 个是第一个有效结点，把 prev 回退到哨兵 */
+        if (prev->next == list->head) {
             prev = list->head;
-            p = unlinkAfter(list, prev);
         }
+        Node* p = unlinkAfter(list, prev);
         printf("%d ", p->data);
         free(p);
         list->size--;
