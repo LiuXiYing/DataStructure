@@ -242,3 +242,31 @@ assignments:
         不核对三张图之间的地址关系，不要求对齐填充字节内容；地址大小写、前导零、分组差异一律忽略；地址表达式即使显示求值错误，只要下方仍显示字节，就不能据此拒绝。仅有代码、菜单或 Run 输出而没有任何 Debug 面板时不满足要求。
       - >-
         图片须为本人电脑的真实截图；不接受手机拍屏、示意图或拼接修改的结果。证据不足时进入人工复核，不直接判定不合格。
+  Lab7:
+    deadline: "2026-10-02T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: false
+    required_files:
+      - CMakeLists.txt
+      - listNode.h
+      - list.h
+      - main.cpp
+      - Lab7.md
+    review_points:
+      - >-
+        CMakeLists.txt 必须用 project 声明 C 和 CXX，设置 C++17，并且有且只有一个 add_executable，目标 lab7_list 对应 main.cpp；listNode.h 与 list.h 不作为源文件列进 add_executable，由 main.cpp 用 #include 引入。
+      - >-
+        三个文件必须在同一目录下能一起编译运行。listNode.h 含 #ifndef LISTNODE_H 头文件卫士、template 声明的 struct ListNode（T data、ListNode<T>* pred、ListNode<T>* succ）、两个构造函数以及 insertAsPred、insertAsSucc 两个成员函数；list.h 含 #ifndef LIST_H 头文件卫士、typedef int Rank、template 声明的 class List。两个头文件都不得出现 using namespace std，也不得包含 iostream 与 listNode.h 之外的头文件。
+      - >-
+        List 类必须有 private、protected、public 三段：_size、header、trailer 三个数据成员在 private 下；init()、clear() 在 protected 下；public 下包含 List、~List、size、empty、first、last、valid、insertAsFirst、insertAsLast、insertA、insertB、remove(ListNode<T>*)、find、operator[]、rankOf、insert(Rank, const T&)、remove(Rank, T&)、get(Rank, T&)、print、printReverse。不得增加或删除数据成员，不得把数据成员改成 public。
+      - >-
+        学生要补的 12 处函数体不能仍是 TODO 或占位返回（return nullptr、return 0、return false、空体都算未完成）：ListNode<T>::insertAsPred、insertAsSucc；List<T>::clear、insertA、insertB、remove(ListNode<T>*)、find、operator[]、insert(Rank, const T&)、remove(Rank, T&)、get(Rank, T&)、printReverse。insertA、insertB 必须调用 p->insertAsSucc(e) 与 p->insertAsPred(e)；remove(ListNode<T>*) 里必须有两句断链、一句 delete p 和 _size 减一；printReverse 的停止条件必须是 p != header，不得用 _size 或计数控制。
+      - >-
+        insert(Rank, const T&) 必须复用 insertB()，且秩等于 _size 时目标位置是 trailer 而不是按秩定位的结果；remove(Rank, T&) 与 get(Rank, T&) 必须复用 operator[]()，越界时返回 false 且不修改引用参数；find 必须从 trailer->pred 出发沿 pred 向前走，走到 header 时返回 nullptr；operator[] 必须从 first() 出发走 r 步，r 越界时返回 nullptr。
+      - >-
+        教师提供的接口必须原样保留：ListNode 的两个构造函数、List::init()、List()、~List()（含 clear()、delete header、delete trailer 三句以及末尾那行输出）、size、empty、first、last、valid、insertAsFirst、insertAsLast、rankOf、print，以及 main.cpp 的全部内容。不得使用 malloc、free、数组、std::list、std::vector 或全局变量，不得把三个文件合并成一个 .cpp，也不得把类定义内联进 main.cpp。
+      - >-
+        Lab7.md 必须保留题目结构，4.1 到 4.6 每题必须且只能选择一个 [x]；4.7 的对照表至少填写四行；4.8 不少于 60 字。本次不要求调试截图，不检查 imgs 目录。
+      - >-
+        本文本阶段只检查三个文件的接口结构、程序完整性与作答完整性，不判断选项、运行结果或解释是否正确。
