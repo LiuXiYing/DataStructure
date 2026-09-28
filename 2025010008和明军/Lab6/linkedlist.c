@@ -113,6 +113,7 @@ int listRemove(LinkedList* list, int rank, int* value) {
         return 0;
     }
     Node* p = unlinkAfter(prevOf(list, rank));
+    if (p==NULL)return 0;
     *value = p->data;
     free(p);
     list->size -=1;
