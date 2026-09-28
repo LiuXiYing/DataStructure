@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+/* 结点：与课堂上写的完全相同，不得修改 */
 typedef struct Node {
     int data;           /* 数据域：保存一个整数 */
     struct Node* next;  /* 指针域：保存下一个结点的地址，NULL 表示没有后继 */
