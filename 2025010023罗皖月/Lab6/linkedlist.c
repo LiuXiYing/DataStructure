@@ -96,67 +96,66 @@ int listEmpty(const LinkedList* list) {
 /* 练习 1：输出。从第一个有效结点开始输出，哨兵不输出，每个数后面一个空格，末尾换行 */
 void listPrint(const LinkedList* list) {
     printf("[size = %d] ", list->size);
-    for (const Node* p = list->head->next; p != NULL; p = p->next) {
-        printf("%d ", p->data);
-    }
+    for (const Node* p=list->head->next;p!=NULL;p=p->next)
+        printf("%d ",p->data);/* TODO：for (const Node* p = list->head->next; p != NULL; p = p->next) */
     printf("\n");
 }
 
 /* 练习 2：在秩 rank 处插入 value，合法范围 0 <= rank <= size
  * 成功返回 1 并让 size 加一；rank 非法返回 0，链表不变 */
 int listInsert(LinkedList* list, int rank, int value) {
-    if (rank < 0 || rank > list->size) {
+    if (rank<0||rank>list->size)
         return 0;
-    }
-    insertAfter(prevOf(list, rank), value);
+    insertAfter(prevOf(list,rank),value);
     list->size++;
-    return 1;
+    return 1;   /* TODO：检查 rank；insertAfter(prevOf(list, rank), value)；size 加一 */
 }
 
 /* 练习 3：顺序追加与表头插入，都复用 listInsert，不得另写接链代码 */
 int listPushBack(LinkedList* list, int value) {
-    return listInsert(list, list->size, value);
+    return listInsert(list, list->size, value); /* TODO：listInsert(list, list->size, value) */
 }
 
 int listPushFront(LinkedList* list, int value) {
-    return listInsert(list, 0, value);
+
+    return listInsert(list, 0, value); /* TODO：listInsert(list, 0, value) */
 }
 
 /* 练习 4：删除秩 rank 处的结点，被删的值写入 *value，合法范围 0 <= rank < size
  * 成功返回 1 并让 size 减一；失败返回 0 且不修改 *value
  * 必须用局部变量 p 接住 unlinkAfter 的返回值，并单独一行写 free(p);（3.5 的断点设在这一行） */
 int listRemove(LinkedList* list, int rank, int* value) {
-    if (rank < 0 || rank >= list->size) {
+    if (rank<0||rank>=list->size)
         return 0;
-    }
-    Node* p = unlinkAfter(prevOf(list, rank));
-    *value = p->data;
+    Node* p=unlinkAfter(prevOf(list,rank));
+    *value=p->data;
     free(p);
     list->size--;
-    return 1;
+    return 1;/* TODO：检查 rank；Node* p = unlinkAfter(prevOf(list, rank))；取出 data；free(p)；size 减一 */
 }
 
 /* 练习 5：按秩读取，合法范围 0 <= rank < size；失败时不修改 *value */
 int listGet(const LinkedList* list, int rank, int* value) {
-    if (rank < 0 || rank >= list->size) {
-        return 0;
-    }
-    *value = prevOf(list, rank)->next->data;
+    if (rank<0||rank>=list->size)
+    return 0;
+    Node* p=list->head->next;
+    for (int i=0;i<rank;i++)
+        p=p->next;
+    *value=p->data;
     return 1;
+    /* TODO */
 }
 
 /* 练习 6：按值查找，返回第一次出现的秩，找不到返回 -1。从 head->next 开始数，秩从 0 起 */
 int listFind(const LinkedList* list, int value) {
-    int rank = 0;
-    for (const Node* p = list->head->next; p != NULL; p = p->next) {
-        if (p->data == value) {
-            return rank;
-        }
-        rank++;
+    int dex=0;
+    for (const Node* p=list->head->next;p!=NULL;p=p->next) {
+        if (p->data==value)
+            return dex;
+        dex++;
     }
-    return -1;
+    return -1;  /* TODO */
 }
-
 /* 测试顺序与讲义附录一、Lab4 的向量完全一致，方便逐行对照 */
 int main(void) {
     LinkedList list;
