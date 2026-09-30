@@ -138,11 +138,11 @@ int listRemove(LinkedList* list, int rank, int* value) {
 
 /* 练习 5：按秩读取，合法范围 0 <= rank < size；失败时不修改 *value */
 int listGet(const LinkedList* list, int rank, int* value) {
-    if (rank < 0 || rank >= list->size) {
-        return 0;
+    if (rank >= 0 && rank < list->size) {
+        *value = prevOf(list, rank)->next->data;
+        return 1;
     }
-    *value = prevOf(list, rank)->next->data;
-    return 1;
+    return 0;
 }
 
 /* 练习 6：按值查找，返回第一次出现的秩，找不到返回 -1。从 head->next 开始数，秩从 0 起 */
