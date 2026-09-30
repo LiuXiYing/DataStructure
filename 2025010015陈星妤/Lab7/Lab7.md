@@ -790,13 +790,13 @@ get(0) = 1.5, size = 4
 
 把右列补全，至少填写四行：
 
-| Lab6 的 C 版 | 本次的课本版                         |
-| :--- |:-------------------------------------|
-| `LinkedList list; listInit(&list);` | `List<T>list;`                       |
-| `listPushBack(&list, v)` | `list.insertAaLast(v);`              |
-| `listInsert(&list, 2, 25)` | `list.insert(list.git(20),25);`      |
-| `listRemove(&list, 1, &removed)` | `list.remove(list.get(1));`          |
-| `listFind(&list, 18)`（返回秩） | `list.find(18)`                      |
+| Lab6 的 C 版 | 本次的课本版                           |
+| :--- |:---------------------------------------|
+| `LinkedList list; listInit(&list);` | `List<T>list;`                         |
+| `listPushBack(&list, v)` | `list.insertAsLast(v);`                |
+| `listInsert(&list, 2, 25)` | `list.insert(list.git(20),25);`        |
+| `listRemove(&list, 1, &removed)` | `list.remove(list.get(1));`            |
+| `listFind(&list, 18)`（返回秩） | `list.find(18)`                        |
 | `main` 结尾的 `listDestroy(&list);` | `无需手动销毁，对象离开作用域自动析构` |
 ### 4.8 填空：三句话解释
 
