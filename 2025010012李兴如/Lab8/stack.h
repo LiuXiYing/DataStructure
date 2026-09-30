@@ -19,13 +19,11 @@ void Stack<T>::push(const T& e) {
 
 template <typename T>
 T Stack<T>::pop() {
-    if (!this->empty())
        return this->remove(this->size()-1);/* TODO 2：复用基类的按秩删除；调用者保证栈非空。 */
 }
 
 template <typename T>
 T& Stack<T>::top() {
-    if (!this->empty())
         return this->operator[](this->size()-1);/* TODO 3：返回末元素的引用，不删除元素；调用者保证栈非空。 */
 }
 
