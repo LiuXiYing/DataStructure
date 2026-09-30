@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.20)
+project(Lab7 C CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIREDON)
+
+add_executable(lab7_list main.cpp)
