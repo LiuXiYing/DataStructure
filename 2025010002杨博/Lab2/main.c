@@ -45,23 +45,20 @@ long long algorithm4(int n) {
     return count;
 }
 
-int main(void) {
-    int inputs[] = {2048, 4096, 8192, 16384};
-    int num_inputs = sizeof(inputs) / sizeof(inputs[0]);
 
-    printf("%-8s %-14s %-14s %-12s %-14s\n",
-           "n", "algorithm1", "algorithm2", "algorithm3", "algorithm4");
-
-    for (int k = 0; k < num_inputs; k++) {
-        int n = inputs[k];
-        long long r1 = algorithm1(n);
-        long long r2 = algorithm2(n);
-        long long r3 = algorithm3(n);
-        long long r4 = algorithm4(n);
-
-        printf("%-8d %-14lld %-14lld %-12lld %-14lld\n",
-               n, r1, r2, r3, r4);
+int main(void)
+{
+    int arr[] = {2048, 4096, 8192, 16384};
+    int len = sizeof(arr)/sizeof(arr[0]);
+    for(int i = 0; i < len; i++)
+    {
+        int n = arr[i];
+        long long c1 = algorithm1(n);
+        long long c2 = algorithm2(n);
+        long long c3 = algorithm3(n);
+        long long c4 = algorithm4(n);
+        printf("n=%d: algorithm1 count=%lld, algorithm2 count=%lld, algorithm3 count=%lld, algorithm4 count=%lld\n",
+               n, c1, c2, c3, c4);
     }
-
     return 0;
 }
