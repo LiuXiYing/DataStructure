@@ -24,7 +24,9 @@ bool testRoundRobin(const char initial[], int rounds,
                     const char expectedService[], const char expectedQueue[]) {
     Queue<char> Q;
     /* 按字符串从左到右入队，构造测试的初始顺序。 */
-    for (Rank i = 0; initial[i] != '\0'; ++i) Q.enqueue(initial[i]);
+    for (Rank i = 0; initial[i] != '\0'; ++i) {
+        Q.enqueue(initial[i]);
+    }
     std::ostringstream service;
     /* 临时让 cout 把字符写入 service，并保存它原来的输出位置。
      * 调用后立即恢复，以便下面的测试报告仍正常显示在控制台。
@@ -35,10 +37,15 @@ bool testRoundRobin(const char initial[], int rounds,
 
     /* 函数返回后再逐个出队检查剩余顺序；清空队列的是测试代码。 */
     std::string remaining;
-    while (!Q.empty()) remaining += Q.dequeue();
-    bool ok = service.str() == expectedService && remaining == expectedQueue && Q.size() == 0;
+    while (!Q.empty()) {
+        remaining += Q.dequeue();
+    }
+    bool ok = service.str() == expectedService
+              && remaining == expectedQueue
+              && Q.size() == 0;
     std::cout << "initial = [" << initial << "], rounds = " << rounds << '\n';
-    std::cout << "  service = [" << service.str() << "], expected = [" << expectedService << "]\n";
+    std::cout << "  service = [" << service.str()
+              << "], expected = [" << expectedService << "]\n";
     std::cout << "  queue = [" << remaining << "], expected = [" << expectedQueue << "] "
               << (ok ? "PASS" : "FAIL") << '\n';
     return ok;
@@ -49,12 +56,24 @@ int main() {
     /* 覆盖多轮循环、零次、单元素、空队列、恰好一轮和只服务一次。
      * expectedService 中最后一个字符后也有空格，与函数的输出约定一致。
      */
-    if (testRoundRobin("ABC", 8, "A B C A B C A B ", "CAB")) ++passed;
-    if (testRoundRobin("ABC", 0, "", "ABC")) ++passed;
-    if (testRoundRobin("A", 4, "A A A A ", "A")) ++passed;
-    if (testRoundRobin("", 3, "", "")) ++passed;
-    if (testRoundRobin("ABC", 3, "A B C ", "ABC")) ++passed;
-    if (testRoundRobin("ABC", 1, "A ", "BCA")) ++passed;
+    if (testRoundRobin("ABC", 8, "A B C A B C A B ", "CAB")) {
+        ++passed;
+    }
+    if (testRoundRobin("ABC", 0, "", "ABC")) {
+        ++passed;
+    }
+    if (testRoundRobin("A", 4, "A A A A ", "A")) {
+        ++passed;
+    }
+    if (testRoundRobin("", 3, "", "")) {
+        ++passed;
+    }
+    if (testRoundRobin("ABC", 3, "A B C ", "ABC")) {
+        ++passed;
+    }
+    if (testRoundRobin("ABC", 1, "A ", "BCA")) {
+        ++passed;
+    }
     std::cout << "round-robin tests: " << passed << "/6 passed\n";
     return passed == 6 ? 0 : 1;
 }

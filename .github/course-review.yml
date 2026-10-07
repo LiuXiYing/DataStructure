@@ -315,3 +315,44 @@ assignments:
         call_recursive.png：能辨认五个 factorial 活动帧和 main 帧，当前最深 factorial 帧中的 n 为 0、base 为 1。无需同时展示另外四层的参数，也无需内存地址。
       - >-
         只按上述调用栈与已初始化变量验收，不额外要求断点行号、完整源文件、返回地址、Memory View 或标准库帧。左栏中未被选中的灰色行不算缺失帧，当前帧的行号与调用者帧的行号含义不同也不按错误处理。仅有 Run 输出而无 Debug 面板不满足要求；关键内容无法辨认时进入人工复核。
+  Lab9:
+    deadline: "2026-10-16T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: false
+    ocr_review: false
+    report_template: homework/Lab9/Lab9.md
+    # 第一阶段数量预检，仅对本次新发布的 Lab9 启用，不影响 Lab1—Lab8。
+    template_metrics:
+      enabled: true
+      report_file: Lab9.md
+      characters: ['#', '-', '*', '`', '|', '>']
+      max_file_bytes: 200000
+    required_files:
+      - queue.h
+      - round_robin.cpp
+      - bank.cpp
+      - Lab9.md
+    review_points:
+      - >-
+        本次只提交 queue.h、round_robin.cpp、bank.cpp、Lab9.md 四个文件。list.h、main.cpp、CMakeLists.txt 是 homework/Lab9 中教师提供的公共文件，只在本地保留用于编译，不要求学生提交；不得因缺少这三个公共文件而判为不完整，也不得要求截图、imgs 目录或 queue.cpp。三个学生代码文件应与教师公共文件配合构成 C++17 程序，不能要求其中任一文件脱离公共文件独立编译。
+      - >-
+        queue.h 保留 QUEUE_H 头文件卫士、对 list.h 的包含，以及 template <typename T> class Queue : public List<T>。完整实现 void enqueue(const T& e)、T dequeue()、T& front() 三个接口；模板函数体保留在头文件中，保留参数的 const 和引用。不得增加数据成员、构造析构、计数器或另建节点结构；不得仍是空函数体或只有占位返回。已完成函数中保留 TODO 说明注释本身不算未完成，应检查实际函数体。
+      - >-
+        Queue 的 enqueue 复用基类 insertAsLast 尾插；dequeue 复用 first 与 remove，返回被删元素的值；front 返回 first 指向节点的 data 引用，不删除节点。依赖基类名称使用 this-> 或 List<T>:: 限定。dequeue 与 front 由调用者保证非空，不额外要求接口内部判空、异常处理或空队列返回约定；内存与节点管理交给 List，不在 Queue 内另写接链、new 或 delete。
+      - >-
+        round_robin.cpp 保留 void roundRobin(Queue<char>& Q, int rounds) 接口并补全实际循环：最多分配 rounds 次，每次先判空，保存 dequeue 返回的字符值，以 std::cout << e << ' ' 输出服务对象，再将该值 enqueue 回队尾；不在函数中输出标题、换行或其他文字。rounds 为 0 时不改变队列，空队列立即结束；rounds 表示服务对象的次数，不是全队循环的轮数。只使用队列接口，不能通过重排固定测试字符串或写死服务顺序代替操作。
+      - >-
+        round_robin.cpp 的 testRoundRobin、输出收集与恢复、结束后逐个出队检查队列的逻辑以及 main 的六组测试均保留；六组分别为 ABC/8、ABC/0、A/4、空队列/3、ABC/3、ABC/1，继续核对服务顺序和结束队列并汇总 6 组结果。教师驱动中的 sstream、string、std::ostringstream、std::string 和测试数组属于允许的测试辅助代码，不得当成使用标准容器替代队列的违规。
+      - >-
+        bank.cpp 保留 Customer 的 int window、unsigned int time 两个字段，完整实现 int bestWindow(Queue<Customer> windows[], Rank nWin) 和 int serveOneTick(Queue<Customer> windows[], Rank nWin)。bestWindow 根据各窗口 size 比较人数，返回最短队列编号，同长时保留较小编号；调用者保证 nWin > 0，不额外要求处理非法窗口数。serveOneTick 遍历窗口、跳过空队列、通过 front 修改队内顾客的剩余时间，减到零时 dequeue 并计数；每个窗口本轮只服务原队首一次，返回本轮完成人数，不能仅修改顾客的局部副本或用内层循环继续服务新队首。
+      - >-
+        bank.cpp 的 simulate、输出与统计逻辑和 main 保持教师流程：动态创建窗口队列数组，按每轮先到达选窗入队、再服务出队的顺序推进，记录本轮结果，结束后统计剩余人数并 delete[]；main 使用到达表 {3, 2, 4, 1, 2, 0} 调用 simulate(2, 6, arrivals)。这些教师提供的数组及 new/delete[] 是窗口管理，不是用数组重写队列，不得误判为违规。不能删改驱动、固定返回值或按到达表直接打印预设答案；本次三个目标均不要求手动输入。
+      - >-
+        学生实现必须使用自制 Queue，不得用 std::queue、std::deque、std::list、std::vector 或另一套数组、链表代替队列。两个应用通过 enqueue、dequeue、front、size、empty 操作，不绕过接口直接修改 List 节点；教师提供的测试数据数组、窗口队列数组和输出收集辅助代码除外。只要求补全三项 Queue 接口、roundRobin、bestWindow、serveOneTick 六处任务，不追加课外功能、压力测试或复杂测试框架。
+      - >-
+        Lab9.md 的 6.1 三行接口映射表中操作位置、复用接口或成员、返回值含义全部填写，后面三个问题分别作答；6.2 五次分配表的服务对象、出队后队列、重新入队后队列全部填写，并回答服务次数与下一对象、循环分配与循环链表的区别及遗漏重新入队的影响、空队列处理三个问题；6.3 四个时刻的服务结束队列和离开顾客全部填写，填写 arrived、served、remaining 三项统计并说明新队首不能在同一轮接受服务的原因。
+      - >-
+        Lab9.md 的 6.4 八行复杂度表全部填写复杂度和理由，首行 enqueue、dequeue、front 三个操作都须覆盖；6.5 三题分别用两三句话作答，最后一题包含队列人数与服务时间不同的例子；6.6 粘贴本人队列与循环分配器的两条测试汇总，说明银行逐轮输出是否与 5.5 一致，粘贴银行最终统计并核对人数关系，有错误时简述修正方法。填写区域不能为空或仍为“填写”等占位内容，教师前文的示例输出不能代替 6.6 的本人运行记录。
+      - >-
+        本文本阶段沿用本课程的接口结构、程序完整性和作答完整性审核，不判断运行数值、手工追踪、复杂度或解释是否正确，也不声称已实际编译或运行学生程序；正确性由课程后续检测进一步检查。Lab9.md 应保留完整模板并完成第六节，第一至五节的教师说明和示例不要求改写成个人结果；行数和各类源码符号数量由前置确定性检查负责，数量通过不代表作答完成。本次不启用第二阶段的固定题号、结构清单或逐题结构化返回规则。

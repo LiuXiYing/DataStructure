@@ -13,3 +13,6 @@ enable_testing()
 add_test(NAME queue COMMAND lab9_queue)
 add_test(NAME round_robin COMMAND lab9_round_robin)
 add_test(NAME bank COMMAND lab9_bank)
+set_tests_properties(bank PROPERTIES
+    PASS_REGULAR_EXPRESSION "arrived=5, served=4, remaining=1"
+)

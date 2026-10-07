@@ -17,10 +17,14 @@ struct ListNode {
     ListNodePosi(T) succ;            /* 后继：沿此指针向表尾方向移动 */
 
     /* 哨兵也使用这个节点类型，默认构造时先把两个方向的指针置空。 */
-    ListNode() : data(), pred(nullptr), succ(nullptr) {}
+    ListNode()
+        : data(), pred(nullptr), succ(nullptr) {
+    }
+
     /* 创建真实节点时，同时记录元素及它将连接的前驱、后继。 */
     ListNode(const T& e, ListNodePosi(T) p = nullptr, ListNodePosi(T) s = nullptr)
-        : data(e), pred(p), succ(s) {}
+        : data(e), pred(p), succ(s) {
+    }
 
     ListNodePosi(T) insertAsPred(const T& e);  /* 在当前节点之前插入 */
     ListNodePosi(T) insertAsSucc(const T& e);  /* 在当前节点之后插入 */
@@ -58,20 +62,35 @@ private:
     void init();
 
 public:
-    List() { init(); }
+    List() {
+        init();
+    }
+
     ~List();
 
     /* 本实验不练习深拷贝；禁止默认浅拷贝，避免重复释放同一批节点。 */
     List(const List&) = delete;
     List& operator=(const List&) = delete;
 
-    Rank size() const { return _size; }
-    bool empty() const { return _size == 0; }
+    Rank size() const {
+        return _size;
+    }
+
+    bool empty() const {
+        return _size == 0;
+    }
+
     /* 空表的 first() 是 trailer，last() 是 header，均不是 nullptr。
      * 因而读取元素之前要用 empty() 判空，不能只检查节点指针是否非空。
      */
-    ListNodePosi(T) first() const { return header->succ; }
-    ListNodePosi(T) last() const { return trailer->pred; }
+    ListNodePosi(T) first() const {
+        return header->succ;
+    }
+
+    ListNodePosi(T) last() const {
+        return trailer->pred;
+    }
+
     ListNodePosi(T) insertAsFirst(const T& e);
     ListNodePosi(T) insertAsLast(const T& e);
     T remove(ListNodePosi(T) p);    /* p 必须是本表中尚未删除的真实节点 */
@@ -131,7 +150,9 @@ template <typename T>
 int List<T>::clear() {
     int oldSize = _size;
     /* 每次删除当前首节点；remove 会同步减少 _size，直到表空为止。 */
-    while (_size > 0) remove(first());
+    while (_size > 0) {
+        remove(first());
+    }
     return oldSize;
 }
 
