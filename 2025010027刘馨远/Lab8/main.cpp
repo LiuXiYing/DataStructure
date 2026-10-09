@@ -2,7 +2,7 @@
 #include "stack.h"
 
 /* 学生完成：只检查 exp[lo, hi)，调用者保证区间合法。 */
-bool paren(const char exp[], Rank lo, Rank hi) {
+
     /* TODO 5：用 Stack<char> 检查 exp[lo, hi) 里的三种括号，忽略其他字符，返回是否匹配。
      *
      * 思路——从左向右扫一遍：
@@ -41,7 +41,7 @@ bool paren(const char exp[], Rank lo, Rank hi) {
         }
         return S.empty();
     }
-}
+
 
 /* 以下测试与 main 由教师提供，不得修改。按题目中的输出逐项核对。 */
 void testStack() {
