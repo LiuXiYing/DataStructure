@@ -322,8 +322,8 @@ arrived=5, served=4, remaining=1
 | 2 | C，需要 3 单位 | B:0 C:3                             | B              |
 | 3 | 无 | C:2                                 | C              |
 
-- 最终统计：`arrived =`（填写），`served =`（填写），`remaining =`（填写）。
-- `now == 1` 时 A 离开后，为什么 B 不能在同一轮完成服务？（填写）
+- 最终统计：`arrived =`3，`served =`3，`remaining =`0。
+- `now == 1` 时 A 离开后，为什么 B 不能在同一轮完成服务？因为顾客在一个时间单位只能被服务一个
 
 ### 6.4 时间与空间
 
@@ -359,7 +359,7 @@ arrived=5, served=4, remaining=1
 
 ### 6.6 运行验证
 
-- 粘贴队列、循环分配器的测试汇总行，应分别为 `12/12`、`6/6`。若有错误，简述修正方法。queue tests: 12/12 passed，round-robin tests: 6/6 passed
+- 粘贴队列、循环分配器的测试汇总行，应分别为 `12/12`、`6/6`。若有错误，简述修正方法。 queue tests: 12/12 passed，round-robin tests: 6/6 passed
 - 银行程序的逐轮输出是否与 5.5 一致？粘贴最终汇总，核对“到达 = 完成 + 剩余”。一致，arrived=5, served=4, remaining=1
 
 ## 七、提交要求
