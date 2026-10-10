@@ -1,7 +1,6 @@
 
 
-#include <iostream>
-#include "list.h"
+// Lab7提交测试
 
 static void testIntList() {
     List<int> list;
