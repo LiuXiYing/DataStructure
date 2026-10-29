@@ -3,10 +3,6 @@ version: 1
 # 账号映射来自教师名单与 DataStructure 仓库 PR 作者。
 # 尚未确认 GitHub 账号的学生暂不登记，确认后再追加。
 students:
-  "2025011233":
-    name: 刘西莹
-    github: StudentYXNU
-    active: true
   "2025010001":
     name: 阎兆航
     github: yan-zhao-hang
@@ -167,10 +163,10 @@ students:
     name: 范文韬
     github: fwt307
     active: true
-  "2024010040":
-    name: 张哲
-    github: 123zhangzhe
-    active: true
+  # "2024010040":
+  #   name: 张哲
+  #   github: 123zhangzhe
+  #   active: true
   "2024010020":
     name: 朱勇章
     github: QS666NB

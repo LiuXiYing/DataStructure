@@ -385,3 +385,175 @@ assignments:
         答案只能通过勾选产生，学生不得在提交文件中自行添加正确答案、答案解析或答案速查表；除勾选外不得改动作答说明等教师模板文字。
       - >-
         本文本阶段只检查文件完整性与作答完整性，即每题是否填写了答案，不判断所选选项是否正确，不核对、不解释正确答案，也不因答案分布或与他人相同而判为不合格；内容正确性将在期末统一检测。题目、选项和源码符号数量由前置确定性检查负责，数量通过不代表作答完成。
+  Lab11:
+    deadline: "2026-10-23T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: false
+    ocr_review: false
+    report_template: homework/Lab11/Lab11.md
+    # 第一阶段数量预检，仅对本次新发布的 Lab11 启用，不影响 Lab1—Lab10。
+    template_metrics:
+      enabled: true
+      report_file: Lab11.md
+      characters: ['#', '-', '*', '`', '|', '>']
+      max_file_bytes: 200000
+    required_files:
+      - binNode.h
+      - traversal.cpp
+      - Lab11.md
+    review_points:
+      - >-
+        本次只提交 binNode.h、traversal.cpp、Lab11.md 三个文件。CMakeLists.txt 是 homework/Lab11 中教师提供的公共文件，只在本地保留用于编译，不要求学生提交；不得因缺少该公共文件而判为不完整，也不得要求截图、imgs 目录、main.cpp、traversal.h 或其他源文件。binNode.h 与 traversal.cpp 应与教师公共文件放在同一目录构成 C++17 程序，不能要求其中任一文件脱离公共文件独立编译。
+      - >-
+        binNode.h 保留 BINNODE_H 头文件卫士，且整个文件只包含一个 template <typename T> struct BinNode：三个数据成员（元素本身类型 T、左孩子指针 lc、右孩子指针 rc，两个指针命名和书写先后符合注释即可）加两个构造函数（默认构造把两个孩子置为 nullptr、由元素构造的构造函数同样置空）。不得增加 parent、height 等其他数据成员，不得增加 succ、size、insert 等成员函数，也不得添加计数、标记或访问序字段；三个成员仍为空、缺少任意一个、缺少任一构造函数或节点结构被改写为其他形式（例如数组、左右孩子合并成结构体）均判为未完成。
+      - >-
+        traversal.cpp 保留对 <iostream>、<queue> 和 binNode.h 的包含、using Node = BinNode<char>;，以及四个遍历函数的签名：void preorder(Node*)、void inorder(Node*)、void postorder(Node*)、void levelOrder(Node*)。不得改函数名、改参数类型、改成模板或改成返回 bool/string 等其他类型；四个函数体都不能仍是空函数体、只有 TODO 注释或写死输出的占位实现。教师提供的 destroyTree（按先左右子树后根的顺序递归释放并 delete）与 main 末尾的四行输出框架（依次打印四种遍历的中文标签、调用对应遍历、输出换行，最后 destroyTree 并 return 0）应保留：标签文字、行顺序不得改动，不得删除 destroyTree 或改为不释放任何节点。
+      - >-
+        main 中的手动建树只能逐个 new 节点、给 data 赋值、给 lc/rc 赋值，按 Lab11.md 第三节指定形状建树：A 的左右孩子为 B、C，B 的左右孩子为 D、E，C 只有右孩子 F，D、E、F 为叶子，根节点指针须接到输出框架使用的 root 上。使用默认构造后逐个赋值与使用带元素构造函数均可；建议保留 C->lc = nullptr; 一类的显式赋空但不作硬性要求。不得用循环、数组、递归函数或从输入读取代替手动建树，不得在建树部分输出，不得引入全局变量保存节点。
+      - >-
+        preorder、inorder、postorder 必须是递归实现：以 root == nullptr 为递归出口直接返回，访问统一为输出节点 data 后跟一个空格（std::cout << root->data << ' ';），三个函数仅“访问根”与两次递归的先后位置不同。不得用循环加显式栈、另一个队列或把节点收集到数组、容器再统一输出的方式代替递归，不得输出换行或标题；函数必须对任意形状的二叉树成立，不得只对指定树正确、写死字符序列或加入只对个别树成立的分支。
+      - >-
+        levelOrder 必须借助先进先出队列实现：先判空，根节点入队，循环中取出队头访问，再按先左后右把存在的孩子入队，直到队列为空。允许使用 std::queue<Node*>（教师模板已包含 <queue>），只做 push、front、pop、empty 操作；不得用递归代替队列，不得一次输出一整层，不得用 std::stack 或其他结构模拟队列语义。
+      - >-
+        四行遍历输出必须由真实建树与遍历产生：不得用四句写死的 cout/printf 直接打印 Lab11.md 5.3 的预期结果冒充遍历，不得改动输出框架的标签文字与行结构。学生实现必须使用本次的 BinNode 二叉链表结构，不得用 std::map、std::set、std::multiset、std::vector、std::list、std::deque、std::string 或另一套数组、链表代替树节点或收集遍历结果（层次遍历的 std::queue<Node*> 除外）；不得混用 malloc/free 与 new/delete；不得引入全局变量保存树或遍历结果。本次不需要手动输入。
+      - >-
+        Lab11.md 的 6.1 五行接口映射表与三个问题、6.2 四条遍历序列与三个问题、6.3 七行递归展开表、空树调用次数与一般调用次数、6.4 五行复杂度表与形状说明、6.5 五个讨论题、6.6 的两条运行验证全部填写，填写位置不能为空或仍为“填写”等占位内容；教师前文的树形图、口诀和 5.3 的预期输出不能代替 6.2 的手工推演，6.6 必须是本人运行记录，不能用教师示例输出代替。
+      - >-
+        本文本阶段只检查接口结构、程序完整性和作答完整性，不判断遍历序列、手工追踪、复杂度或文字解释是否正确，也不声称已实际编译或运行学生程序；正确性由课程后续检测进一步检查。Lab11.md 应保留完整模板并完成第六节，第一至五节的教师说明与示例不要求改写成个人结果；行数和各类源码符号数量由前置确定性检查负责，数量通过不代表作答完成。本次不启用第二阶段的固定题号、结构清单或逐题结构化返回规则。
+  Lab12:
+    deadline: "2026-10-27T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: false
+    ocr_review: false
+    report_template: homework/Lab12/Lab12.md
+    # 第一阶段数量预检，仅对本次新发布的 Lab12 启用，不影响 Lab1—Lab11。
+    template_metrics:
+      enabled: true
+      report_file: Lab12.md
+      characters: ['#', '-', '*', '`', '|', '>']
+      max_file_bytes: 200000
+    required_files:
+      - binNode.h
+      - binTree.h
+      - Lab12.md
+    review_points:
+      - >-
+        本次只提交 binNode.h、binTree.h、Lab12.md 三个文件。main.cpp 与 CMakeLists.txt 是 homework/Lab12 中教师提供的公共文件，只在本地保留用于编译与 CTest，不要求学生提交；不得因缺少 main.cpp、CMakeLists.txt、截图、imgs 目录、运行日志或其他源文件而判为不完整。三个提交文件与这两个公共文件放在同一目录即可构成 C++17 程序。
+      - >-
+        binNode.h 保留 BINNODE_H 头文件卫士，且整个文件只包含一个 struct BinNode：三个数据成员（元素本身类型 char、左孩子指针、右孩子指针，两个指针用 BinNodePosi 别名，书写先后与注释一致即可）；BinNode 与 BinNodePosi 都不得改成模板。本次节点必须是聚合体，不得添加构造函数、成员函数、parent、height、color、npl、计数或标记等其他成员；文件末尾教师提供的 HasLChild、HasRChild、HasChild、HasBothChildren、IsLeaf 五个宏必须保留，不得删除、改名、改写或替换成 using / typedef。三个成员为空、缺少任意一个、多出其他成员，或把节点改成数组、左右孩子合并成结构体等形式，均判为未完成。
+      - >-
+        binTree.h 保留对 binNode.h 的包含、类模板结构、唯一的私有数据成员 _root、私有静态 searchIn 与 buildIn，以及 public 四个接口 build、search、remove、update 的名称、参数与返回类型；不得把类或节点改成模板、改变返回类型，也不得把二叉树改成其他容器或数据结构。不得增加数据成员、析构函数或其他访问接口，不得新增 searchIn、buildIn 以外的辅助函数；四种操作各自在自己的函数体内完成。TODO 2～5 必须写成真实的函数体，不能是空函数体、只有 TODO 注释、占位返回值，也不能为通过测试而写死分支。
+      - >-
+        教师已经在 binTree.h 中提供 root() 与文件末尾的 travPre、travIn、travPost 三个遍历函数，它们只用于 main.cpp 核对整棵树：必须原样保留，不得删除或改写，也不得把它们当作学生新增的辅助函数。学生需要完成的只有 binNode.h 的 TODO 1 与 binTree.h 的 TODO 2～5，共五处。
+      - >-
+        本次是无序二叉树：search 必须按“根、左、右”遍历整棵树，命中返回保存该元素的那一格指针槽，落空返回空槽，不得改写成“左小右大”的下降或借助其他数据结构定位；remove 只允许删除叶子，非叶子必须返回 false 且不改动树，成功删除时 delete 节点之后必须把那一格槽写成 nullptr；update 在三种不该改的情形（两值相等、旧值不存在、新值已存在）返回 false，其余情况直接原地改写节点的 data，不做删旧插新；不得使用 std::map、std::set、std::vector、std::list、数组、链表或哈希表代替本二叉树，不得混用 malloc/free 与 new/delete。
+      - >-
+        本次建树的界面是 bool build(const char* seq)：一个字符串表示先序扩展序列，'#' 表示空子树、'\0' 表示序列结束。buildIn 必须按先序递归建树：读到 '\0' 或 '#' 返回 nullptr，否则建立节点后先递归左子树、再递归右子树，下标 i 按引用推进；build 在 _root 非空时必须返回 false 且不破坏已有的树，空树时从 i = 0 建起并返回 true。不得把建树改成读取标准输入、写死形状或按层序建树；元素类型固定按 char 理解，不要求模板对其他类型也成立。
+      - >-
+        Lab12.md 必须保留作业模板的完整题目结构与排版，并完成第六节全部作答：6.1 四行接口映射表与三个问题；6.2 六行建树追踪表与三个问题；6.3 三种删除情况表、五行删除追踪表与三个问题；6.4 七行复杂度表；6.5 五个讨论问题；6.6 粘贴本人十二组测试的完整输出（含最后的汇总行，应为 12/12 passed）、说明把 6.2 的序列改错后运行会怎样，并简述 CTest 结果。填写位置不能为空，也不能保留“（填写）”等占位内容；教师给出的示例不能代替 6.6 的本人运行记录。
+      - >-
+        本文本阶段只检查接口结构、程序完整性和作答完整性，不判断运行数值、手工追踪、复杂度或文字解释是否正确，也不声称已实际编译或运行学生程序；正确性由课程后续检测进一步检查。Lab12.md 应保留完整模板并完成第六节，第一至五节的教师说明与示例不要求改写成个人结果；行数和各类源码符号数量由前置确定性检查负责，数量通过不代表作答完成。本次不启用第二阶段的固定题号、结构清单或逐题结构化返回规则。
+  Lab13:
+    deadline: "2026-10-29T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: false
+    ocr_review: false
+    report_template: homework/Lab13/Lab13.md
+    # 第一阶段数量预检，仅对本次新发布的 Lab13 启用，不影响 Lab1—Lab12。
+    template_metrics:
+      enabled: true
+      report_file: Lab13.md
+      characters: ['#', '-', '*', '`', '|', '>']
+      max_file_bytes: 200000
+    required_files:
+      - Lab13.md
+      - imgs/2016_q1_stem1.png
+      - imgs/2021_q1_stem1.png
+      - imgs/2023_q2_stem1.png
+    review_points:
+      - >-
+        本次为纯书面作业，只提交 Lab13.md 和 imgs 目录下的 3 张题图，共 4 个文件，没有程序；不得因缺少 CMakeLists.txt、源码文件、运行截图、程序输出或 imgs 目录中的其他图片而判为不完整。
+      - >-
+        imgs/2016_q1_stem1.png、imgs/2021_q1_stem1.png、imgs/2023_q2_stem1.png 必须原样复制自 homework/Lab13/imgs/ 中的同名文件，不得修改、重命名、替换或删除；Lab13.md 中题 4、题 6、题 7 的图片引用分别保持 imgs/2016_q1_stem1.png、imgs/2021_q1_stem1.png、imgs/2023_q2_stem1.png 原路径不变。缺少任一题图文件或改动引用路径判为不完整。
+      - >-
+        Lab13.md 必须保留作业模板的完整题目结构：题 1 到题 15 共 15 道单项选择题，每题 4 个选项，全卷共 60 个选项；不得删除、合并、新增题目或选项，不得改写题面，不得调整选项顺序。
+      - >-
+        每道题必须作答：将该题所选选项前的 [ ] 改为 [x]，全卷恰好 15 处 [x]，每题恰好一处；不能全部不选，也不能一题勾选多项。整卷没有任何 [x]、某题未勾选或一题多选均判为未完成作答。
+      - >-
+        答案只能通过勾选产生，学生不得在提交文件中自行添加正确答案、答案解析或答案速查表；除勾选外不得改动作答说明等教师模板文字。
+      - >-
+        本文本阶段只检查文件完整性与作答完整性，即每题是否填写了答案，不判断所选选项是否正确，不核对、不解释正确答案，也不因答案分布或与他人相同而判为不合格；内容正确性将在期末统一检测。题目、选项和源码符号数量由前置确定性检查负责，数量通过不代表作答完成。
+  Lab14:
+    deadline: "2026-10-30T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: false
+    ocr_review: false
+    report_template: homework/Lab14/Lab14.md
+    # 第一阶段数量预检，仅对本次新发布的 Lab14 启用，不影响 Lab1—Lab13。
+    template_metrics:
+      enabled: true
+      report_file: Lab14.md
+      characters: ['#', '-', '*', '`', '|', '>']
+      max_file_bytes: 200000
+    required_files:
+      - Lab14.md
+      - imgs/2009_q3_stem1.png
+      - imgs/2009_q4_A.png
+      - imgs/2009_q4_B.png
+      - imgs/2009_q4_C.png
+      - imgs/2009_q4_D.png
+      - imgs/2010_q3_A.png
+      - imgs/2010_q3_B.png
+      - imgs/2010_q3_C.png
+      - imgs/2010_q3_D.png
+      - imgs/2010_q4_stem1.png
+      - imgs/2014_q4_stem1.png
+      - imgs/2017_q5_stem1.png
+      - imgs/2018_q6_stem1.png
+      - imgs/2020_q5_stem1.png
+      - imgs/2021_q6_stem1.png
+      - imgs/2023_q5_stem1.png
+      - imgs/2024_q7_stem1.png
+    review_points:
+      - >-
+        本次为纯书面作业，只提交 Lab14.md 和 imgs 目录下的 17 张题图，共 18 个文件，没有程序；不得因缺少 CMakeLists.txt、源码文件、运行截图、程序输出或 imgs 目录中的其他图片而判为不完整。
+      - >-
+        imgs 目录中的 17 张题图必须与 homework/Lab14/imgs/ 中的同名文件逐一对应，不得修改、重命名、替换或删除；Lab14.md 中所有图片引用路径必须保持不变。题 27 的四个选项分别使用 imgs/2010_q3_A.png 至 imgs/2010_q3_D.png，题 47 的四个选项分别使用 imgs/2009_q4_A.png 至 imgs/2009_q4_D.png；其余 9 张为题图。缺少任一题图文件或改动引用路径判为不完整。
+      - >-
+        Lab14.md 必须保留作业模板的完整题目结构：题 1 到题 54 共 54 道单项选择题，按题型分为七组，每题 4 个选项，全卷共 216 个选项；不得删除、合并、新增题目或选项，不得改写题面，不得调整选项顺序，不得把按题型分组改回按年份分组。
+      - >-
+        每道题必须作答：将该题所选选项前的 [ ] 改为 [x]，全卷恰好 54 处 [x]，每题恰好一处；不能全部不选，也不能一题勾选多项。整卷没有任何 [x]、某题未勾选或一题多选均判为未完成作答。
+      - >-
+        答案只能通过勾选产生，学生不得在提交文件中自行添加正确答案、答案解析或答案速查表；除勾选外不得改动作答说明等教师模板文字。
+      - >-
+        本文本阶段只检查文件完整性与作答完整性，即每题是否填写了答案，不判断所选选项是否正确，不核对、不解释正确答案，也不因答案分布或与他人相同而判为不合格；内容正确性将在期末统一检测。题目、选项和源码符号数量由前置确定性检查负责，数量通过不代表作答完成。
+  Lab15:
+    deadline: "2026-11-03T00:00:00+08:00"
+    min_nonempty_lines: 5
+    allow_extra_files: false
+    vision_review: false
+    ocr_review: false
+    report_template: homework/Lab15/Lab15.md
+    # 第一阶段数量预检，仅对本次新发布的 Lab15 启用，不影响 Lab1—Lab14。
+    template_metrics:
+      enabled: true
+      report_file: Lab15.md
+      characters: ['#', '-', '*', '`', '|', '>']
+      max_file_bytes: 200000
+    required_files:
+      - Lab15.md
+    review_points:
+      - >-
+        本次为纯书面作业，只提交 Lab15.md 一个文件，没有程序、没有题图；不得因缺少 CMakeLists.txt、源码文件、运行截图、程序输出或 imgs 目录而判为不完整。
+      - >-
+        Lab15.md 必须保留作业模板的完整题目结构：题 1 到题 7 共 7 道单项选择题，按题型分为五组，每题 4 个选项，全卷共 28 个选项；不得删除、合并、新增题目或选项，不得改写题面，不得调整选项顺序，不得把按题型分组改回按年份分组。
+      - >-
+        每道题必须作答：将该题所选选项前的 [ ] 改为 [x]，全卷恰好 7 处 [x]，每题恰好一处；不能全部不选，也不能一题勾选多项。整卷没有任何 [x]、某题未勾选或一题多选均判为未完成作答。
+      - >-
+        答案只能通过勾选产生，学生不得在提交文件中自行添加正确答案、答案解析或答案速查表；除勾选外不得改动作答说明等教师模板文字。
+      - >-
+        本文本阶段只检查文件完整性与作答完整性，即每题是否填写了答案，不判断所选选项是否正确，不核对、不解释正确答案，也不因答案分布或与他人相同而判为不合格；内容正确性将在期末统一检测。题目、选项和源码符号数量由前置确定性检查负责，数量通过不代表作答完成。
