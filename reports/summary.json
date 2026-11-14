@@ -58,9 +58,9 @@
     },
     "Lab17": {
       "deadline": "2026-11-13T00:00:00+08:00",
-      "finalized": 26,
+      "finalized": 27,
       "mode": "legacy",
-      "receipts": 26,
+      "receipts": 27,
       "scored": 0
     },
     "Lab2": {
@@ -122,6 +122,6 @@
   },
   "course_id": "data-structure",
   "errors": 0,
-  "generated_at": "2026-11-13T01:07:59.910309+00:00",
+  "generated_at": "2026-11-14T23:56:20.093403+00:00",
   "schema_version": 1
 }
