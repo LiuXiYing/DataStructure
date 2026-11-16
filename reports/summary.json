@@ -93,9 +93,9 @@
     },
     "Lab6": {
       "deadline": "2026-09-29T00:00:00+08:00",
-      "finalized": 35,
+      "finalized": 36,
       "mode": "legacy",
-      "receipts": 35,
+      "receipts": 36,
       "scored": 0
     },
     "Lab7": {
@@ -122,6 +122,6 @@
   },
   "course_id": "data-structure",
   "errors": 0,
-  "generated_at": "2026-11-14T23:56:20.093403+00:00",
+  "generated_at": "2026-11-16T00:02:13.765629+00:00",
   "schema_version": 1
 }
