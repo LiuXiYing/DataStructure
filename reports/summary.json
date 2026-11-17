@@ -16,16 +16,16 @@
     },
     "Lab11": {
       "deadline": "2026-10-23T00:00:00+08:00",
-      "finalized": 35,
+      "finalized": 36,
       "mode": "legacy",
-      "receipts": 35,
+      "receipts": 36,
       "scored": 0
     },
     "Lab12": {
       "deadline": "2026-10-27T00:00:00+08:00",
-      "finalized": 35,
+      "finalized": 36,
       "mode": "legacy",
-      "receipts": 35,
+      "receipts": 36,
       "scored": 0
     },
     "Lab13": {
@@ -62,6 +62,13 @@
       "mode": "legacy",
       "receipts": 27,
       "scored": 0
+    },
+    "Lab18": {
+      "deadline": "2026-11-24T00:00:00+08:00",
+      "finalized": 4,
+      "mode": "tiered",
+      "receipts": 4,
+      "scored": 4
     },
     "Lab2": {
       "deadline": "2026-09-11T00:00:00+08:00",
@@ -122,6 +129,6 @@
   },
   "course_id": "data-structure",
   "errors": 0,
-  "generated_at": "2026-11-16T00:02:13.765629+00:00",
+  "generated_at": "2026-11-17T02:57:36.540043+00:00",
   "schema_version": 1
 }
