@@ -191,6 +191,7 @@ data-structure,2025010003,Beau-Sun,Lab14,legacy,0,BACKFILL,2026-10-30T00:00:00+0
 data-structure,2025010004,demonlover07,Lab14,legacy,774,PASS,2026-10-30T00:00:00+08:00,2026-11-12T10:33:09+08:00,1161189,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010007,Tarilblazer,Lab14,legacy,0,BACKFILL,2026-10-30T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010008,yxnuhmj-2026,Lab14,legacy,0,BACKFILL,2026-10-30T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
+data-structure,2025010009,lucky1-ops,Lab14,legacy,789,PASS,2026-10-30T00:00:00+08:00,2026-11-18T00:21:48+08:00,1642908,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010010,shark844,Lab14,legacy,0,BACKFILL,2026-10-30T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010011,Emoonstart,Lab14,legacy,0,BACKFILL,2026-10-30T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010012,Storm-xr516,Lab14,legacy,0,BACKFILL,2026-10-30T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
@@ -224,6 +225,7 @@ data-structure,2025010003,Beau-Sun,Lab15,legacy,0,BACKFILL,2026-11-03T00:00:00+0
 data-structure,2025010004,demonlover07,Lab15,legacy,775,PASS,2026-11-03T00:00:00+08:00,2026-11-12T10:34:20+08:00,815660,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010007,Tarilblazer,Lab15,legacy,0,BACKFILL,2026-11-03T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010008,yxnuhmj-2026,Lab15,legacy,0,BACKFILL,2026-11-03T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
+data-structure,2025010009,lucky1-ops,Lab15,legacy,790,PASS,2026-11-03T00:00:00+08:00,2026-11-18T00:28:38+08:00,1297718,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010011,Emoonstart,Lab15,legacy,0,BACKFILL,2026-11-03T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010012,Storm-xr516,Lab15,legacy,0,BACKFILL,2026-11-03T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010013,xue17zq,Lab15,legacy,0,BACKFILL,2026-11-03T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
@@ -283,6 +285,7 @@ data-structure,2024010020,QS666NB,Lab17,legacy,741,PASS,2026-11-13T00:00:00+08:0
 data-structure,2025010002,Boundary-Breaker,Lab17,legacy,0,BACKFILL,2026-11-13T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010004,demonlover07,Lab17,legacy,777,PASS,2026-11-13T00:00:00+08:00,2026-11-12T10:43:48+08:00,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010007,Tarilblazer,Lab17,legacy,0,BACKFILL,2026-11-13T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
+data-structure,2025010008,yxnuhmj-2026,Lab17,legacy,795,PASS,2026-11-13T00:00:00+08:00,2026-11-18T01:23:02+08:00,436982,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010011,Emoonstart,Lab17,legacy,0,BACKFILL,2026-11-13T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010012,Storm-xr516,Lab17,legacy,0,BACKFILL,2026-11-13T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010013,xue17zq,Lab17,legacy,0,BACKFILL,2026-11-13T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
@@ -309,7 +312,9 @@ data-structure,2025145025,fwt307,Lab17,legacy,781,PASS,2026-11-13T00:00:00+08:00
 data-structure,2025010013,xue17zq,Lab18,tiered,784,PASS,2026-11-24T00:00:00+08:00,2026-11-16T12:48:59+08:00,0,False,100,10.00,10.00,FINALIZED,2026-fall-v1
 data-structure,2025010014,RedFlowersG,Lab18,tiered,783,PASS,2026-11-24T00:00:00+08:00,2026-11-16T10:01:18+08:00,0,False,100,10.00,10.00,FINALIZED,2026-fall-v1
 data-structure,2025010032,sherggte,Lab18,tiered,785,PASS,2026-11-24T00:00:00+08:00,2026-11-16T13:04:02+08:00,0,False,100,10.00,10.00,FINALIZED,2026-fall-v1
+data-structure,2025010036,li-yang-andy,Lab18,tiered,791,PASS,2026-11-24T00:00:00+08:00,2026-11-18T00:34:15+08:00,0,False,100,10.00,10.00,FINALIZED,2026-fall-v1
 data-structure,2025010041,free-0011,Lab18,tiered,786,PASS,2026-11-24T00:00:00+08:00,2026-11-16T21:32:04+08:00,0,False,100,10.00,10.00,FINALIZED,2026-fall-v1
+data-structure,2025145025,fwt307,Lab18,tiered,796,PASS,2026-11-24T00:00:00+08:00,2026-11-18T01:46:17+08:00,0,False,100,10.00,10.00,FINALIZED,2026-fall-v1
 data-structure,2024010020,QS666NB,Lab2,legacy,0,BACKFILL,2026-09-11T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010001,yan-zhao-hang,Lab2,legacy,0,BACKFILL,2026-09-11T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010002,Boundary-Breaker,Lab2,legacy,0,BACKFILL,2026-09-11T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
@@ -398,6 +403,7 @@ data-structure,2025010003,Beau-Sun,Lab4,legacy,0,BACKFILL,2026-09-18T00:00:00+08
 data-structure,2025010004,demonlover07,Lab4,legacy,0,BACKFILL,2026-09-18T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010005,long-314,Lab4,legacy,0,BACKFILL,2026-09-18T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010007,Tarilblazer,Lab4,legacy,0,BACKFILL,2026-09-18T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
+data-structure,2025010008,yxnuhmj-2026,Lab4,legacy,792,PASS,2026-09-18T00:00:00+08:00,2026-11-18T00:58:49+08:00,5273929,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010009,lucky1-ops,Lab4,legacy,0,BACKFILL,2026-09-18T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010010,shark844,Lab4,legacy,0,BACKFILL,2026-09-18T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010011,Emoonstart,Lab4,legacy,0,BACKFILL,2026-09-18T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
@@ -475,6 +481,7 @@ data-structure,2025010003,Beau-Sun,Lab6,legacy,0,BACKFILL,2026-09-29T00:00:00+08
 data-structure,2025010004,demonlover07,Lab6,legacy,0,BACKFILL,2026-09-29T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010005,long-314,Lab6,legacy,0,BACKFILL,2026-09-29T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010007,Tarilblazer,Lab6,legacy,0,BACKFILL,2026-09-29T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
+data-structure,2025010008,yxnuhmj-2026,Lab6,legacy,793,PASS,2026-09-29T00:00:00+08:00,2026-11-18T01:08:05+08:00,4324085,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010009,lucky1-ops,Lab6,legacy,0,BACKFILL,2026-09-29T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010010,shark844,Lab6,legacy,0,BACKFILL,2026-09-29T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010011,Emoonstart,Lab6,legacy,0,BACKFILL,2026-09-29T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
@@ -512,6 +519,7 @@ data-structure,2025010003,Beau-Sun,Lab7,legacy,0,BACKFILL,2026-10-02T00:00:00+08
 data-structure,2025010004,demonlover07,Lab7,legacy,0,BACKFILL,2026-10-02T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010005,long-314,Lab7,legacy,0,BACKFILL,2026-10-02T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010007,Tarilblazer,Lab7,legacy,0,BACKFILL,2026-10-02T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
+data-structure,2025010008,yxnuhmj-2026,Lab7,legacy,794,PASS,2026-10-02T00:00:00+08:00,2026-11-18T01:16:28+08:00,4065388,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010009,lucky1-ops,Lab7,legacy,0,BACKFILL,2026-10-02T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010010,shark844,Lab7,legacy,0,BACKFILL,2026-10-02T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
 data-structure,2025010011,Emoonstart,Lab7,legacy,0,BACKFILL,2026-10-02T00:00:00+08:00,,0,False,,,,FINALIZED,2026-fall-v1
