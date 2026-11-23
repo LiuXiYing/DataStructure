@@ -44,44 +44,51 @@
     },
     "Lab15": {
       "deadline": "2026-11-03T00:00:00+08:00",
+      "finalized": 35,
+      "mode": "legacy",
+      "receipts": 35,
+      "scored": 0
+    },
+    "Lab16": {
+      "deadline": "2026-11-07T00:00:00+08:00",
       "finalized": 34,
       "mode": "legacy",
       "receipts": 34,
       "scored": 0
     },
-    "Lab16": {
-      "deadline": "2026-11-07T00:00:00+08:00",
+    "Lab17": {
+      "deadline": "2026-11-13T00:00:00+08:00",
       "finalized": 32,
       "mode": "legacy",
       "receipts": 32,
       "scored": 0
     },
-    "Lab17": {
-      "deadline": "2026-11-13T00:00:00+08:00",
-      "finalized": 31,
-      "mode": "legacy",
-      "receipts": 31,
-      "scored": 0
-    },
     "Lab18": {
       "deadline": "2026-11-24T00:00:00+08:00",
-      "finalized": 23,
+      "finalized": 26,
       "mode": "tiered",
-      "receipts": 23,
-      "scored": 23
+      "receipts": 26,
+      "scored": 26
     },
     "Lab19": {
       "deadline": "2026-11-27T00:00:00+08:00",
-      "finalized": 10,
+      "finalized": 13,
       "mode": "tiered",
-      "receipts": 10,
-      "scored": 10
+      "receipts": 13,
+      "scored": 13
     },
     "Lab2": {
       "deadline": "2026-09-11T00:00:00+08:00",
       "finalized": 41,
       "mode": "legacy",
       "receipts": 41,
+      "scored": 0
+    },
+    "Lab20": {
+      "deadline": "2026-12-01T00:00:00+08:00",
+      "finalized": 0,
+      "mode": "tiered",
+      "receipts": 0,
       "scored": 0
     },
     "Lab3": {
@@ -136,6 +143,6 @@
   },
   "course_id": "data-structure",
   "errors": 0,
-  "generated_at": "2026-11-21T01:35:27.639546+00:00",
+  "generated_at": "2026-11-23T00:52:02.183236+00:00",
   "schema_version": 1
 }
