@@ -86,10 +86,10 @@
     },
     "Lab20": {
       "deadline": "2026-12-01T00:00:00+08:00",
-      "finalized": 13,
+      "finalized": 14,
       "mode": "tiered",
-      "receipts": 13,
-      "scored": 13
+      "receipts": 14,
+      "scored": 14
     },
     "Lab3": {
       "deadline": "2026-09-15T00:00:00+08:00",
@@ -143,6 +143,6 @@
   },
   "course_id": "data-structure",
   "errors": 0,
-  "generated_at": "2026-11-27T02:53:57.366117+00:00",
+  "generated_at": "2026-11-28T02:44:34.964114+00:00",
   "schema_version": 1
 }
